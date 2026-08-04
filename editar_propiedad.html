@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Editar Propiedad - Special Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <style>
+        :root {
+            --bg-body: #F9F7F4;
+            --bg-card: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --color-primary: #C5A059;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 4px 20px rgba(0,0,0,0.03);
+
+            --seo-red: #E74C3C;
+            --seo-orange: #E67E22;
+            --seo-green: #27AE60;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Lato", sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; font-size: 15px; }
+
+        /* BARRA LATERAL ACTUALIZADA EXACTAMENTE IGUAL AL PORTAL Y KANBAN */
+        .sidebar {
+            width: 110px;
+            background-color: #1A1A1A;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 0;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            width: 65px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .brand-logo-img { width: 38px; height: auto; object-fit: contain; display: block; }
+        
+        .brand-text {
+            font-weight: 700;
+            font-size: 7.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #FFFFFF;
+            margin-top: 4px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ÍCONOS FLAT MINIMALISTAS CON TEXTO DEBAJO */
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-icon-box {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #AAA;
+            border-radius: 10px;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active .nav-icon-box, .nav-item:hover .nav-icon-box {
+            background-color: #2D2D2D;
+            color: var(--color-primary);
+        }
+
+        .nav-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #888888;
+            text-align: center;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active .nav-label, .nav-item:hover .nav-label {
+            color: var(--color-primary);
+        }
+
+        .main-content { margin-left: 110px; flex: 1; padding: 35px 40px; max-width: 960px; width: calc(100% - 110px); }
+        .form-card { background: var(--bg-card); border-radius: 16px; padding: 35px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        
+        .page-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 4px; }
+        .page-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 25px; }
+
+        .steps-header { display: flex; border-bottom: 2px solid #F1F5F9; margin-bottom: 30px; gap: 10px; }
+        .step-tab { flex: 1; padding: 12px 10px; text-align: center; font-size: 0.8rem; font-weight: 700; color: #94A3B8; border-bottom: 3px solid transparent; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; }
+        .step-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 900; }
+
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea { padding: 11px 14px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; outline: none; background: #FFF; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-primary); }
+        .form-group input[readonly] { background-color: #F8FAFC; color: #64748B; cursor: not-allowed; }
+
+        .drag-drop-zone { border: 2px dashed var(--color-primary); border-radius: 12px; padding: 25px 20px; text-align: center; background-color: #FAF8F5; cursor: pointer; transition: background 0.2s; margin-bottom: 20px; }
+        .drag-drop-zone:hover { background-color: #F3ECE1; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 15px; }
+        .image-card { background: #FFF; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; position: relative; cursor: grab; box-shadow: var(--shadow-sm); user-select: none; }
+        .image-card-img { width: 100%; height: 105px; object-fit: cover; }
+        
+        .image-badge { position: absolute; top: 6px; left: 6px; padding: 3px 6px; border-radius: 4px; font-size: 0.6rem; font-weight: 900; text-transform: uppercase; color: #FFF; }
+        .badge-principal { background-color: var(--color-primary); color: #1A1A1A; }
+        .badge-destacada { background-color: #1A1A1A; }
+        .badge-galeria { background-color: #64748B; }
+
+        .btn-img-delete { position: absolute; top: 6px; right: 6px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 24px; height: 24px; color: var(--seo-red); font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+
+        .amenities-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+        .amenity-checkbox { display: flex; align-items: center; gap: 8px; background-color: #F8FAFC; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer; font-size: 0.82rem; font-weight: 700; color: var(--text-main); }
+        .amenity-checkbox input[type="checkbox"] { accent-color: var(--color-primary); width: 16px; height: 16px; }
+
+        .wizard-buttons { display: flex; justify-content: space-between; margin-top: 30px; gap: 15px; }
+        .btn-wizard { padding: 12px 24px; border-radius: 8px; font-weight: 900; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; border: none; }
+        .btn-prev { background: #ECEFF1; color: var(--text-main); }
+        .btn-next { background: var(--text-main); color: #FFF; }
+        .btn-submit { background: var(--color-primary); color: #1A1A1A; }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <a href="/" class="sidebar-brand">
+            <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home" class="brand-logo-img">
+            <div class="brand-text">Special Home</div>
+        </a>
+
+        <a href="/portal" class="nav-item">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="nav-label">Portal</span>
+        </a>
+
+        <a href="/kanban" class="nav-item">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <span class="nav-label">Kanban</span>
+        </a>
+
+        <a href="/alta-propiedad" class="nav-item active">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <span class="nav-label">Propiedad</span>
+        </a>
+    </nav>
+
+    <main class="main-content">
+        <div class="form-card">
+            <h1 class="page-title">Editar Ficha de Propiedad</h1>
+            <p class="page-subtitle">Modifica la información y actualiza el inventario en tiempo real</p>
+
+            <div class="steps-header">
+                <div class="step-tab active" onclick="irAlPaso(1)">1. Ubicación</div>
+                <div class="step-tab" onclick="irAlPaso(2)">2. Ficha y Costos</div>
+                <div class="step-tab" onclick="irAlPaso(3)">3. Fotos y Amenidades</div>
+                <div class="step-tab" onclick="irAlPaso(4)">4. Guardar Cambios</div>
+            </div>
+
+            <form id="formPropiedad">
+                
+                <div class="step-content active" id="step-1">
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Categoría Principal</label>
+                            <select id="categoria_tab">
+                                <option value="Propiedades">Propiedades</option>
+                                <option value="Preventa">Preventa</option>
+                                <option value="Naves Ind.">Naves Ind.</option>
+                                <option value="Comercial">Comercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo Especializado</label>
+                            <input type="text" id="tipo_propiedad" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Operación</label>
+                            <select id="tipo_operacion">
+                                <option value="Venta / Renta">Venta / Renta</option>
+                                <option value="Venta">Venta</option>
+                                <option value="Renta">Renta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Título Comercial *</label>
+                            <input type="text" id="titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Slug URL 🔒</label>
+                            <input type="text" id="slug" readonly required>
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Estado *</label>
+                            <input type="text" id="estado" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Municipio / Alcaldía *</label>
+                            <input type="text" id="municipio" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Colonia *</label>
+                            <input type="text" id="colonia" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Calle y Número *</label>
+                            <input type="text" id="calle_numero" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Código Postal *</label>
+                            <input type="text" id="cp" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Google Maps Iframe</label>
+                            <input type="text" id="google_maps_iframe">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-2">
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Precio Lista (MXN) *</label>
+                            <input type="text" id="precio_lista" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Oferta Mínima Aceptable</label>
+                            <input type="text" id="precio_minimo_oferta">
+                        </div>
+                        <div class="form-group">
+                            <label>Precio Renta Mensual</label>
+                            <input type="text" id="precio_renta">
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Terreno (m²) *</label>
+                            <input type="number" id="terreno_m2" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Construcción (m²) *</label>
+                            <input type="number" id="construccion_m2" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Recámaras / Espacios</label>
+                            <input type="number" id="recamaras">
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Baños Completos</label>
+                            <input type="number" id="banos_completos">
+                        </div>
+                        <div class="form-group">
+                            <label>Medios Baños</label>
+                            <input type="number" id="medios_banos">
+                        </div>
+                        <div class="form-group">
+                            <label>Estacionamientos</label>
+                            <input type="number" id="estacionamientos">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-3">
+                    <input type="file" id="fileInput" multiple accept="image/*" style="display: none;" onchange="procesarArchivos(this.files)">
+                    <div class="drag-drop-zone" onclick="document.getElementById('fileInput').click()">
+                        <span style="font-size: 2rem;">📸</span>
+                        <div style="font-weight: 700;">Haz clic o arrastra fotos adicionales</div>
+                    </div>
+
+                    <div class="gallery-grid" id="galleryContainer"></div>
+                </div>
+
+                <div class="step-content" id="step-4">
+                    <div class="form-group">
+                        <label>Redacción de la Descripción Comercial</label>
+                        <textarea id="descripcion" rows="8"></textarea>
+                    </div>
+                </div>
+
+                <div class="wizard-buttons">
+                    <button type="button" class="btn-wizard btn-prev" id="btnPrev" onclick="cambiarPaso(-1)" style="visibility: hidden;">Anterior</button>
+                    <button type="button" class="btn-wizard btn-next" id="btnNext" onclick="cambiarPaso(1)">Siguiente ➔</button>
+                    <button type="submit" class="btn-wizard btn-submit" id="btnSubmit" style="display: none;">GUARDAR CAMBIOS</button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let pasoActual = 1;
+        let listaArchivos = [];
+        const propiedadId = window.location.pathname.split("/").pop();
+
+        function irAlPaso(paso) {
+            pasoActual = paso;
+            document.querySelectorAll('.step-tab').forEach((tab, i) => tab.classList.toggle('active', i + 1 === paso));
+            document.querySelectorAll('.step-content').forEach((sec, i) => sec.classList.toggle('active', i + 1 === paso));
+
+            document.getElementById('btnPrev').style.visibility = paso === 1 ? 'hidden' : 'visible';
+            if (paso === 4) {
+                document.getElementById('btnNext').style.display = 'none';
+                document.getElementById('btnSubmit').style.display = 'block';
+            } else {
+                document.getElementById('btnNext').style.display = 'block';
+                document.getElementById('btnSubmit').style.display = 'none';
+            }
+        }
+
+        function cambiarPaso(dir) {
+            const nuevoPaso = pasoActual + dir;
+            if (nuevoPaso >= 1 && nuevoPaso <= 4) irAlPaso(nuevoPaso);
+        }
+
+        async function cargarDatosPropiedad() {
+            try {
+                const res = await fetch(`/api/propiedades/${propiedadId}`);
+                if (!res.ok) { alert("❌ No se encontró la propiedad"); window.location.href = "/portal"; return; }
+                const p = await res.json();
+
+                document.getElementById("slug").value = p.slug || "";
+                document.getElementById("titulo").value = p.titulo || "";
+                document.getElementById("categoria_tab").value = p.categoria_tab || "Propiedades";
+                document.getElementById("tipo_propiedad").value = p.tipo_propiedad || "";
+                document.getElementById("tipo_operacion").value = p.tipo_operacion || "Venta";
+                document.getElementById("estado").value = p.estado || "";
+                document.getElementById("municipio").value = p.municipio || "";
+                document.getElementById("colonia").value = p.colonia || "";
+                document.getElementById("calle_numero").value = p.calle_numero || "";
+                document.getElementById("cp").value = p.cp || "";
+                document.getElementById("google_maps_iframe").value = p.google_maps_iframe || "";
+
+                document.getElementById("precio_lista").value = "$ " + Number(p.precio_lista).toLocaleString('en-US');
+                document.getElementById("precio_minimo_oferta").value = p.precio_minimo_oferta ? "$ " + Number(p.precio_minimo_oferta).toLocaleString('en-US') : "";
+                document.getElementById("precio_renta").value = p.precio_renta ? "$ " + Number(p.precio_renta).toLocaleString('en-US') : "";
+
+                document.getElementById("terreno_m2").value = p.terreno_m2 || 0;
+                document.getElementById("construccion_m2").value = p.construccion_m2 || 0;
+                document.getElementById("recamaras").value = p.recamaras || 0;
+                document.getElementById("banos_completos").value = p.banos_completos || 0;
+                document.getElementById("medios_banos").value = p.medios_banos || 0;
+                document.getElementById("estacionamientos").value = p.estacionamientos || 0;
+                document.getElementById("descripcion").value = p.descripcion || "";
+
+                const fotosGuardadas = [];
+                if (p.imagen_principal) fotosGuardadas.push(p.imagen_principal);
+                if (p.galeria_imagenes) {
+                    p.galeria_imagenes.split(",").forEach(url => { if (url.trim()) fotosGuardadas.push(url.trim()); });
+                }
+
+                fotosGuardadas.forEach(url => {
+                    listaArchivos.push({ id: Math.random().toString(36).substring(7), isExistente: true, url: url });
+                });
+
+                renderizarGaleria();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function renderizarGaleria() {
+            const container = document.getElementById("galleryContainer");
+            container.innerHTML = "";
+
+            listaArchivos.forEach((item, index) => {
+                let badgeHTML = index === 0 ? `<span class="image-badge badge-principal">🏆 PORTADA</span>` :
+                                `<span class="image-badge badge-galeria">📷 FOTO ${index + 1}</span>`;
+
+                const imgSrc = item.isExistente ? item.url : item.previewUrl;
+
+                container.innerHTML += `
+                    <div class="image-card" data-id="${item.id}">
+                        ${badgeHTML}
+                        <button type="button" class="btn-img-delete" onclick="eliminarFoto('${item.id}')">✕</button>
+                        <img src="${imgSrc}" class="image-card-img" alt="Foto">
+                    </div>
+                `;
+            });
+        }
+
+        function procesarArchivos(files) {
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const previewUrl = URL.createObjectURL(file);
+                    listaArchivos.push({ id: Math.random().toString(36).substring(7), isExistente: false, file: file, previewUrl: previewUrl });
+                }
+            });
+            renderizarGaleria();
+        }
+
+        function eliminarFoto(id) {
+            listaArchivos = listaArchivos.filter(item => item.id !== id);
+            renderizarGaleria();
+        }
+
+        new Sortable(document.getElementById('galleryContainer'), {
+            animation: 150,
+            onEnd: function () {
+                const nuevoOrdenIds = Array.from(document.querySelectorAll('#galleryContainer .image-card')).map(el => el.getAttribute('data-id'));
+                listaArchivos.sort((a, b) => nuevoOrdenIds.indexOf(a.id) - nuevoOrdenIds.indexOf(b.id));
+                renderizarGaleria();
+            }
+        });
+
+        function limpiarNumero(val) {
+            return parseFloat((val || '').replace(/[^0-9.]/g, '')) || 0;
+        }
+
+        document.getElementById("formPropiedad").onsubmit = async function(e) {
+            e.preventDefault();
+
+            let urlsFinales = [];
+            for (let item of listaArchivos) {
+                if (item.isExistente) {
+                    urlsFinales.push(item.url);
+                } else if (item.file) {
+                    const formData = new FormData();
+                    formData.append('archivos', item.file);
+                    const respUpload = await fetch("/api/upload-imagenes", { method: "POST", body: formData });
+                    const resJson = await respUpload.json();
+                    if (resJson.urls && resJson.urls[0]) {
+                        urlsFinales.push(resJson.urls[0]);
+                    }
+                }
+            }
+
+            const datos = {
+                slug: document.getElementById("slug").value,
+                titulo: document.getElementById("titulo").value,
+                categoria_tab: document.getElementById("categoria_tab").value,
+                tipo_propiedad: document.getElementById("tipo_propiedad").value,
+                tipo_operacion: document.getElementById("tipo_operacion").value,
+                imagen_principal: urlsFinales[0] || "",
+                galeria_imagenes: urlsFinales.slice(1).join(","),
+                google_maps_iframe: document.getElementById("google_maps_iframe").value,
+                calle_numero: document.getElementById("calle_numero").value,
+                colonia: document.getElementById("colonia").value,
+                municipio: document.getElementById("municipio").value,
+                estado: document.getElementById("estado").value,
+                cp: document.getElementById("cp").value,
+                precio_lista: limpiarNumero(document.getElementById("precio_lista").value),
+                precio_minimo_oferta: limpiarNumero(document.getElementById("precio_minimo_oferta").value),
+                precio_renta: limpiarNumero(document.getElementById("precio_renta").value),
+                terreno_m2: parseFloat(document.getElementById("terreno_m2").value) || 0,
+                construccion_m2: parseFloat(document.getElementById("construccion_m2").value) || 0,
+                recamaras: parseInt(document.getElementById("recamaras").value) || 0,
+                banos_completos: parseInt(document.getElementById("banos_completos").value) || 0,
+                medios_banos: parseFloat(document.getElementById("medios_banos").value) || 0,
+                estacionamientos: parseInt(document.getElementById("estacionamientos").value) || 0,
+                descripcion: document.getElementById("descripcion").value
+            };
+
+            const resp = await fetch(`/api/propiedades/${propiedadId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(datos)
+            });
+
+            if (resp.ok) {
+                alert("✅ ¡Propiedad actualizada con éxito!");
+                window.location.href = "/portal";
+            } else {
+                alert("❌ Error al actualizar la propiedad");
+            }
+        };
+
+        cargarDatosPropiedad();
+    </script>
+</body>
+</html>

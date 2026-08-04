@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO OPTIMIZACIÓN MÁXIMA -->
+    <title>Special Home | Inmobiliaria y Preventas de Lujo en México</title>
+    <meta name="description" content="Plataforma de corretaje y curaduría para propiedades de alto valor, residencias exclusivas, preventas y naves industriales AAA en México.">
+    <meta name="keywords" content="inmobiliaria de lujo, bienes raíces, preventas exclusivas, naves industriales, casas de lujo méxico, special home">
+    <meta name="author" content="Special Home Real Estate">
+    <link rel="canonical" href="https://specialhome.com.mx/">
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://specialhome.com.mx/">
+    <meta property="og:title" content="Special Home | Inmobiliaria y Preventas de Lujo en México">
+    <meta property="og:description" content="Plataforma tecnológica de corretaje y curaduría para propiedades de alto valor y activos comerciales.">
+    <meta property="og:image" content="https://specialhome.com.mx/static/logo%20sh_Mesa%20de%20trabajo%201.png">
+
+    <!-- Verificación Google Search Console -->
+    <meta name="google-site-verification" content="AQUÍ_TU_CODIGO_DE_VERIFICACION_DE_SEARCH_CONSOLE">
+
+    <!-- Google Tag Manager (GTM) -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5PF7ZFNP');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Tipografía Oficial: Lato -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #FFFFFF;
+            --bg-neutral: #F9F7F4;
+            --bg-dark: #1A1A1A;
+            --bg-gray-metrics: #E4E7EB;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --color-primary: #C5A059;
+            --color-primary-dark: #A38448;
+            --border-color: #CBD5E1;
+            --max-width: 1200px;
+
+            --gold-propiedades: linear-gradient(135deg, #C5A059 0%, #A38448 100%);
+            --gold-preventa: linear-gradient(135deg, #E5C378 0%, #B89343 100%);
+            --gold-naves: linear-gradient(135deg, #B87333 0%, #8C5220 100%);
+            --gold-comercial: linear-gradient(135deg, #D4AF37 0%, #997A15 100%);
+        }
+
+        *, *::before, *::after { box-sizing: border-box !important; margin: 0; padding: 0; }
+        html { width: 100%; overflow-x: hidden !important; scroll-behavior: smooth; }
+        body { display: block !important; width: 100% !important; background-color: var(--bg-body); color: var(--text-main); font-family: "Lato", sans-serif; -webkit-font-smoothing: antialiased; }
+        
+        img { 
+            max-width: 100%; height: auto; display: block; 
+            pointer-events: none; -webkit-user-drag: none; user-select: none; 
+        }
+
+        .container { width: 100%; max-width: var(--max-width); margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+
+        /* HEADER STICKY SIN PLECA NEGRA (TRANSPARENTE FLOTANTE) */
+        .site-header { position: sticky; top: 0; left: 0; width: 100%; z-index: 100; padding: 15px 0; background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%); backdrop-filter: blur(4px); transition: background 0.3s; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .nav-brand { display: flex; flex-direction: column; align-items: center; width: 65px; flex-shrink: 0; text-decoration: none; }
+        .brand-logo-img { width: 42px; height: auto; object-fit: contain; display: block; }
+        .brand-text { font-weight: 900; font-size: 7px; text-transform: uppercase; letter-spacing: 0.8px; color: #FFFFFF; margin-top: 4px; text-align: center; white-space: nowrap; }
+
+        .desktop-nav { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 14px; list-style: none; align-items: center; }
+        .nav-links a { color: #FFFFFF; text-decoration: none; font-size: 0.72rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; transition: color 0.2s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--color-primary); }
+
+        .btn-nav-action { background-color: transparent; border: 2px solid #FFFFFF; padding: 6px 14px; border-radius: 6px; color: #FFFFFF; font-weight: 900; font-size: 0.72rem; text-transform: uppercase; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+        .btn-nav-action:hover { background-color: #FFFFFF; color: var(--text-main); }
+
+        .mobile-hamburger { display: none; background: none; border: none; color: #FFFFFF; font-size: 1.8rem; cursor: pointer; padding: 5px; }
+
+        /* DRAWER MÓVIL */
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0,0,0,0.7); z-index: 199; display: none; }
+        .drawer-overlay.active { display: block; }
+        .mobile-drawer { position: fixed; top: 0; right: 0; width: 85%; max-width: 280px; height: 100vh; background-color: rgba(20, 20, 20, 0.98); backdrop-filter: blur(15px); z-index: 200; display: none; flex-direction: column; padding: 25px; box-shadow: -5px 0 25px rgba(0,0,0,0.5); }
+        .mobile-drawer.active { display: flex; }
+        .drawer-close { align-self: flex-end; background: none; border: none; color: #FFFFFF; font-size: 1.8rem; cursor: pointer; margin-bottom: 25px; }
+        .mobile-drawer-links { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+        .mobile-drawer-links a { color: #FFFFFF; text-decoration: none; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
+        .mobile-drawer-btn { margin-top: 25px; background-color: var(--color-primary); color: #FFFFFF; border: none; padding: 12px; border-radius: 6px; font-weight: 900; text-transform: uppercase; cursor: pointer; width: 100%; }
+
+        /* HERO & BUSCADOR */
+        .hero-section { position: relative; min-height: 560px; padding-top: 40px; padding-bottom: 60px; display: flex; align-items: center; justify-content: center; overflow: hidden; width: 100%; margin-top: -85px; }
+        .hero-bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; z-index: 1; }
+        .hero-bg-layer.active { opacity: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.45)); z-index: 2; }
+        .hero-container { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; width: 100%; padding-top: 50px; }
+
+        .hero-title { text-align: center; margin-bottom: 25px; line-height: 1.15; }
+        .hero-title .title-line { display: block; }
+        .hero-title .text-white { color: #FFFFFF; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 300; }
+        .hero-title .text-gold { color: var(--color-primary); font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 900; }
+
+        .search-wrapper { width: 100%; max-width: 800px; }
+        .search-tabs { display: flex; gap: 4px; width: 100%; }
+        .tab-btn { background-color: rgba(26, 26, 26, 0.85); color: #FFFFFF; border: none; padding: 12px 22px; font-size: 0.75rem; text-transform: uppercase; font-weight: 900; border-top-left-radius: 8px; border-top-right-radius: 8px; cursor: pointer; opacity: 0.85; white-space: nowrap; text-align: center; }
+        .tab-btn.active { opacity: 1; }
+        .tab-btn[data-tab="propiedades"].active { background: var(--gold-propiedades) !important; color: #FFFFFF !important; }
+        .tab-btn[data-tab="preventa"].active { background: var(--gold-preventa) !important; color: #1A1A1A !important; }
+        .tab-btn[data-tab="naves"].active { background: var(--gold-naves) !important; color: #FFFFFF !important; }
+        .tab-btn[data-tab="comercial"].active { background: var(--gold-comercial) !important; color: #FFFFFF !important; }
+
+        .search-main-bar { background-color: #FFFFFF; padding: 12px 16px; border-radius: 0 10px 10px 10px; display: flex; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 100%; }
+        .search-field { flex: 1; min-width: 0; padding: 6px 12px; display: flex; flex-direction: column; border-right: 1px solid var(--border-color); }
+        .search-field:last-of-type { border-right: none; }
+        .search-field label { font-size: 0.65rem; font-weight: 900; color: #94A3B8; text-transform: uppercase; margin-bottom: 4px; }
+        .search-field input, .search-field select { border: none; outline: none; font-size: 0.9rem; font-weight: 700; color: var(--text-main); width: 100%; background: transparent; cursor: pointer; }
+
+        .btn-search-trigger { background: var(--gold-propiedades); color: #FFFFFF; border: none; padding: 14px 28px; border-radius: 6px; font-weight: 900; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; margin-left: 10px; flex-shrink: 0; }
+
+        /* CATÁLOGO */
+        .catalog-section { padding-top: 70px; padding-bottom: 70px; width: 100%; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+        .section-header h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 300; }
+        .section-header h2 span { font-weight: 900; color: var(--text-main); }
+        .section-header a { color: var(--color-primary); font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 0.8rem; }
+
+        .proyectos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; width: 100%; }
+        .proyecto-card { background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.01); transition: transform 0.25s; position: relative; cursor: pointer; }
+        .proyecto-card:hover { transform: translateY(-4px); }
+        .card-badge-status { position: absolute; top: 12px; left: 12px; background-color: #1A1A1A; color: #FFFFFF; padding: 5px 12px; border-radius: 20px; font-size: 0.65rem; text-transform: uppercase; font-weight: 900; z-index: 2; }
+        .card-media { height: 210px; width: 100%; background-color: #EEE; overflow: hidden; }
+        .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .proyecto-card:hover .card-media img { transform: scale(1.04); }
+        .card-info-content { padding: 20px; }
+        .card-meta-tag { font-size: 0.65rem; font-weight: 900; color: var(--color-primary); text-transform: uppercase; margin-bottom: 6px; }
+        .card-main-title { font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; color: var(--text-main); }
+        .card-location { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px; }
+        .card-footer-metrics { border-top: 1px solid #F1F5F9; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; }
+        .metric-price { font-size: 1.1rem; font-weight: 900; }
+        .metric-specs { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; }
+
+        /* EXPERTOS */
+        .experts-section { background-color: var(--bg-neutral); padding-top: 70px; padding-bottom: 70px; width: 100%; }
+        .experts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 35px; width: 100%; }
+        .expert-card { border-radius: 16px; padding: 30px 20px; text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; }
+        .expert-card.gold-theme { background-color: var(--color-primary); color: var(--bg-dark); }
+        .expert-card.dark-theme { background-color: var(--bg-dark); color: #FFFFFF; }
+        .expert-card.gray-theme { background-color: var(--bg-gray-metrics); color: var(--text-main); }
+        .expert-avatar { width: 90px; height: 90px; border-radius: 50%; margin-bottom: 16px; overflow: hidden; background-color: #FFF; border: 2px solid rgba(255,255,255,0.3); }
+        .expert-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .expert-name { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+        .expert-role { font-size: 0.65rem; font-weight: 900; text-transform: uppercase; margin-bottom: 15px; }
+        .expert-bio { font-size: 0.85rem; line-height: 1.5; }
+
+        /* STATS Y VERIFICADO */
+        .stats-section { background-color: var(--bg-gray-metrics); padding: 70px 0 40px; text-align: center; width: 100%; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding-bottom: 45px; }
+        .stat-number { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1; }
+        .stat-number span { font-size: clamp(1rem, 2.5vw, 1.8rem); vertical-align: super; font-weight: 400; }
+        .stat-label { font-size: 0.95rem; font-weight: 700; color: var(--text-muted); margin-top: 12px; }
+        .backing-container { background-color: var(--bg-dark); border-radius: 12px; padding: 25px 30px; }
+        .backing-text { font-size: clamp(0.95rem, 2.5vw, 1.4rem); font-weight: 900; color: var(--color-primary); }
+
+        .verified-section { background-color: var(--bg-gray-metrics); padding: 30px 0 70px; text-align: center; width: 100%; }
+        .verified-title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 300; margin-bottom: 6px; }
+        .verified-title span { font-weight: 900; }
+        .verified-subtitle { font-size: 1rem; font-weight: 900; color: var(--color-primary-dark); text-transform: uppercase; margin-bottom: 35px; }
+        .verified-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .verified-card { background-color: #FFFFFF; border-radius: 10px; padding: 24px; text-align: left; display: flex; flex-direction: column; gap: 12px; border: 1px solid rgba(0,0,0,0.03); }
+        .verified-card-icon { width: 24px; height: 24px; fill: #27AE60; }
+        .verified-card-text { font-size: 0.85rem; font-weight: 700; line-height: 1.4; }
+
+        /* CTA & FOOTER */
+        .cta-section { background-color: var(--bg-neutral); padding: 55px 0; width: 100%; }
+        .cta-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .cta-text-side h3 { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 300; }
+        .cta-text-side h3 span { font-weight: 900; }
+        .btn-cta-action { background-color: var(--text-main); color: #FFFFFF; border: none; padding: 16px 32px; border-radius: 8px; font-weight: 900; text-transform: uppercase; font-size: 0.8rem; cursor: pointer; }
+
+        .site-footer { background-color: #1A1A1A; color: #FFFFFF; padding: 60px 0 30px; border-top: 4px solid var(--color-primary); width: 100%; }
+        .footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 30px; border-bottom: 1px solid #2D2D2D; padding-bottom: 40px; }
+        .footer-brand-col { display: flex; flex-direction: column; gap: 12px; }
+        .footer-brand-col p { font-size: 0.8rem; color: #888; line-height: 1.5; }
+        .footer-links-col h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 20px; font-weight: 900; }
+        .footer-links-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links-col ul a { color: #AAA; text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: color 0.2s; }
+        .footer-links-col ul a:hover { color: #FFFFFF; }
+        .footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #666; }
+        .footer-bottom-links { display: flex; gap: 15px; }
+        .footer-bottom-links a { color: #666; text-decoration: none; font-weight: 700; }
+
+        @media (max-width: 900px) {
+            .desktop-nav { display: none !important; }
+            .mobile-hamburger { display: block !important; }
+            .proyectos-grid, .experts-grid, .stats-grid, .verified-grid, .footer-grid { grid-template-columns: 1fr !important; gap: 20px; }
+            .search-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+            .search-main-bar { flex-direction: column; padding: 12px; gap: 8px; }
+            .search-field { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .btn-search-trigger { width: 100%; margin-left: 0; }
+        }
+    </style>
+
+    <!-- Schema.org Structured Data para Inmobiliaria y Organización (SEO Avanzado) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Special Home",
+      "image": "https://specialhome.com.mx/static/logo%20sh_Mesa%20de%20trabajo%201.png",
+      "@id": "https://specialhome.com.mx/",
+      "url": "https://specialhome.com.mx/",
+      "telephone": "+525525288728",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Tlalnepantla de Baz",
+        "addressRegion": "Estado de México",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.5438,
+        "longitude": -99.1996
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "19:00"
+      },
+      "sameAs": [
+        "https://specialhome.com.mx/"
+      ]
+    }
+    </script>
+</head>
+<body oncontextmenu="return false;">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PF7ZFNP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <aside class="mobile-drawer" id="mobile-drawer">
+        <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar Menú">✕</button>
+        <ul class="mobile-drawer-links">
+            <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+            <li><a href="/buscador?tab=preventa">Preventa</a></li>
+            <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+            <li><a href="/buscador?tab=comercial">Comercial</a></li>
+            <li><a href="/soluciones-b2b">Soluciones B2B y Proyectos</a></li>
+        </ul>
+        <button class="mobile-drawer-btn" onclick="window.location.href='/portal'">Portal del Asesor</button>
+    </aside>
+
+    <!-- HEADER CON LOGOTIPO PNG OFICIAL -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="/" class="nav-brand" aria-label="Inicio Special Home">
+                <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home Logo" class="brand-logo-img">
+                <div class="brand-text">Special Home</div>
+            </a>
+
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+                    <li><a href="/buscador?tab=preventa">Preventa</a></li>
+                    <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+                    <li><a href="/buscador?tab=comercial">Comercial</a></li>
+                    <li><a href="/soluciones-b2b">Soluciones B2B y Proyectos</a></li>
+                </ul>
+                <button class="btn-nav-action" onclick="window.location.href='/portal'">Portal del Asesor</button>
+            </nav>
+
+            <button class="mobile-hamburger" id="hamburger-btn" aria-label="Abrir Menú">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section" id="hero-slider-container">
+            <div class="hero-overlay"></div>
+            
+            <div class="container hero-container">
+                <h1 class="hero-title">
+                    <span class="title-line text-white">Invierte en</span>
+                    <span class="title-line text-gold">Propiedades de</span>
+                    <span class="title-line text-gold">Alto Valor</span>
+                </h1>
+                
+                <div class="search-wrapper" id="search-wrapper" data-active-tab="propiedades">
+                    <div class="search-tabs">
+                        <button class="tab-btn active" id="tab-propiedades" data-tab="propiedades" onclick="switchTab(this, 'propiedades')">Propiedades</button>
+                        <button class="tab-btn" id="tab-preventa" data-tab="preventa" onclick="switchTab(this, 'preventa')">Preventa</button>
+                        <button class="tab-btn" id="tab-naves" data-tab="naves" onclick="switchTab(this, 'naves')">Naves Ind.</button>
+                        <button class="tab-btn" id="tab-comercial" data-tab="comercial" onclick="switchTab(this, 'comercial')">Comercial</button>
+                    </div>
+                    
+                    <div class="search-main-bar">
+                        <div class="search-field">
+                            <label for="inputUbicacionBusqueda">¿Dónde quieres invertir?</label>
+                            <input type="text" id="inputUbicacionBusqueda" placeholder="Ej. Lomas, San Pedro...">
+                        </div>
+                        <div class="search-field">
+                            <label for="select-property-type" id="label-property-type">Tipo de propiedad</label>
+                            <select id="select-property-type"></select>
+                        </div>
+                        <button class="btn-search-trigger" onclick="ejecutarBusquedaHome()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2>Nuevas <span>Propiedades</span></h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Encuentra propiedades premium en la Ciudad de México y Alrededores.</p>
+                    </div>
+                    <a href="/buscador">Ver Todas las Propiedades →</a>
+                </div>
+
+                <div class="proyectos-grid" id="grid-propiedades"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE EXPERTOS -->
+        <section class="experts-section">
+            <div class="container">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <div><h2>Nuestros <span>Expertos Inmobiliarios</span></h2></div>
+                </div>
+                <div class="experts-grid">
+                    <div class="expert-card gold-theme">
+                        <div class="expert-avatar">
+                            <img src="/static/Irving_Diaz.jpeg" alt="Irving Díaz - Director de Inversiones Comerciales Special Home">
+                        </div>
+                        <div class="expert-name">Irving Díaz</div>
+                        <div class="expert-role">Director de Inversiones Comerciales</div>
+                        <div class="expert-bio">18 años de experiencia en ventas de propiedades de alto valor, estructuración de portafolios industriales y naves AAA.</div>
+                    </div>
+                    <div class="expert-card dark-theme">
+                        <div class="expert-avatar">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Magdalena Ocampo - Consultora de Residencias de Lujo Special Home">
+                        </div>
+                        <div class="expert-name">Magdalena Ocampo</div>
+                        <div class="expert-role">Consultora de Residencias de Lujo</div>
+                        <div class="expert-bio">Especialista senior en corretaje patrimonial, gestión notarial y transacciones residenciales exclusivas en México.</div>
+                    </div>
+                    <div class="expert-card gray-theme">
+                        <div class="expert-avatar">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=200&auto=format&fit=crop" alt="Joshua Díaz - Consultor de Residencias Boutique Special Home">
+                        </div>
+                        <div class="expert-name">Joshua Díaz</div>
+                        <div class="expert-role">Consultor de Residencias Boutique</div>
+                        <div class="expert-bio">Curador de arte arquitectónico y propiedades residenciales VIP en México.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item"><div class="stat-number">+600</div><div class="stat-label">Propiedades vendidas</div></div>
+                    <div class="stat-item"><div class="stat-number">+800</div><div class="stat-label">Inversores felices</div></div>
+                    <div class="stat-item"><div class="stat-number">+$2,500<span>MXN</span></div><div class="stat-label">Millones en transacciones</div></div>
+                </div>
+                <div class="backing-container"><div class="backing-text">Respaldo sólido y familiar de 60 años de servicio Inmobiliario by Arkidinamica & Luxury Real State. AMPI</div></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: SPECIAL HOME VERIFICADO CON LOS 6 PUNTOS EXACTOS -->
+        <section class="verified-section">
+            <div class="container">
+                <h2 class="verified-title">Special Home <span>Verificado</span></h2>
+                <div class="verified-subtitle">Revisamos cada activo por ti:</div>
+                <div class="verified-grid">
+                    <div class="verified-card"><svg class="verified-card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><div class="verified-card-text">Que el Desarrollador esté debidamente constituido y sin antecedentes legales graves.</div></div>
+                    <div class="verified-card"><svg class="verified-card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><div class="verified-card-text">Validación absoluta de títulos de propiedad, libertad de gravamen y uso de suelo comercial o residencial.</div></div>
+                    <div class="verified-card"><svg class="verified-card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><div class="verified-card-text">Certeza de marca y contratos de adhesión validados para evitar quejas ante PROFECO.</div></div>
+                    <div class="verified-card"><svg class="verified-card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><div class="verified-card-text">Verificación de factibilidades técnicas, conectividad logística, Cross-docking y servicios para Naves Industriales AAA.</div></div>
+                    <div class="verified-card"><svg class="verified-card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><div class="verified-card-text">Que la situación fiscal de los representantes legales y las empresas esté totalmente activa y en regla ante el SAT.</div></div>
+                    <div class="verified-card"><svg class="verified-card-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><div class="verified-card-text">Estructura legal transparente en fideicomisos de inversión para Plazas Comerciales y Desarrollos Inmobiliarios.</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-wrapper">
+                    <div class="cta-text-side">
+                        <h3>¿Necesitas asesoría con un <span>Experto Special Home</span>?</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Te ayudamos a estructurar tu portafolio de inversión inmobiliaria sin costo.</p>
+                    </div>
+                    <button class="btn-cta-action" onclick="solicitarInformesPublico('asesoria-patrimonial-vip')">Hablar con un experto</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER COMPLETO -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <a href="/" class="nav-brand" style="margin-bottom: 5px;">
+                        <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home" class="brand-logo-img" style="width: 42px;">
+                    </a>
+                    <h4 style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: #FFF; font-weight: 900; margin-top: 5px;">Special Home</h4>
+                    <p>La plataforma tecnológica de corretaje y curaduría para el mercado residencial de lujo, naves industriales, activos comerciales y soluciones jurídicas en México.</p>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>Menú Principal</h4>
+                    <ul>
+                        <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+                        <li><a href="/buscador?tab=preventa">Preventa</a></li>
+                        <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+                        <li><a href="/buscador?tab=comercial">Comercial</a></li>
+                        <li><a href="/soluciones-b2b">Soluciones Jurídicas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Regiones Premium</h4>
+                    <ul>
+                        <li><a href="#">San Pedro Garza García</a></li>
+                        <li><a href="#">Lomas de Chapultepec</a></li>
+                        <li><a href="#">Puerta de Hierro</a></li>
+                        <li><a href="#">Punta Mita Exclusive</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Corporativo</h4>
+                    <ul>
+                        <li><a href="#">Quiénes Somos</a></li>
+                        <li><a href="#">Unirse como Asesor</a></li>
+                        <li><a href="#">Market Insights</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 specialhome.com.mx. Todos los derechos reservados.</div>
+                <div class="footer-bottom-links">
+                    <a href="/aviso-privacidad">Aviso de Privacidad</a>
+                    <a href="/terminos-condiciones">Términos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerCloseBtn = document.getElementById('drawer-close-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+
+            function openDrawer() { mobileDrawer.classList.add('active'); drawerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            function closeDrawer() { mobileDrawer.classList.remove('active'); drawerOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+
+            if(hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+            if(drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+            if(drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+            // Bloquear clic derecho global en todas las imágenes por seguridad adicional
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('contextmenu', e => e.preventDefault());
+            });
+
+            construirSliderHero();
+            actualizarDropdownBuscador('propiedades');
+            renderizarPropiedadesHome();
+        });
+
+        const opcionesDropdownBuscador = {
+            propiedades: ["Mansiones", "Golf Estates", "Country Club", "Casa de Lujo", "Departamento de Lujo"],
+            preventa: ["Desarrollos inmobiliarios", "Condominios", "Pent-houses", "Garden Houses", "Lofts"],
+            naves: ["Warehouse", "CEDIS", "Naves para Manufactura", "Cross-docking"],
+            comercial: ["Street Retail", "Plazas y Centros Comerciales", "Oficinas", "Kioscos y Stands"]
+        };
+
+        let categoriaActivaGlobal = 'propiedades';
+
+        function switchTab(element, categoryKey) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            categoriaActivaGlobal = categoryKey;
+            
+            const searchWrapper = document.getElementById('search-wrapper');
+            if (searchWrapper) searchWrapper.setAttribute('data-active-tab', categoryKey);
+
+            actualizarDropdownBuscador(categoryKey);
+        }
+
+        function actualizarDropdownBuscador(categoryKey) {
+            const selectElement = document.getElementById('select-property-type');
+            if (!selectElement) return;
+            const opciones = opcionesDropdownBuscador[categoryKey] || [];
+            selectElement.innerHTML = opciones.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        const imagenesSliderHero = [
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1600&auto=format&fit=crop"
+        ];
+
+        function construirSliderHero() {
+            const container = document.getElementById('hero-slider-container');
+            if (!container) return;
+            imagenesSliderHero.forEach((imgUrl, index) => {
+                const layer = document.createElement('div');
+                layer.className = `hero-bg-layer ${index === 0 ? 'active' : ''}`;
+                layer.style.backgroundImage = `url('${imgUrl}')`;
+                container.insertBefore(layer, container.firstChild);
+            });
+            let activeIndex = 0;
+            const layers = document.querySelectorAll('.hero-bg-layer');
+            setInterval(() => {
+                if(layers.length === 0) return;
+                layers[activeIndex].classList.remove('active');
+                activeIndex = (activeIndex + 1) % layers.length;
+                layers[activeIndex].classList.add('active');
+            }, 4000);
+        }
+
+        async function renderizarPropiedadesHome() {
+            const gridContainer = document.getElementById('grid-propiedades');
+            if (!gridContainer) return;
+
+            try {
+                const res = await fetch("/api/propiedades");
+                const data = await res.json();
+                let propiedadesCRM = data.propiedades || [];
+
+                // Mostrar únicamente las 12 más recientes
+                propiedadesCRM = propiedadesCRM.slice(0, 12);
+
+                if (propiedadesCRM.length === 0) {
+                    gridContainer.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: #F8FAFC; border-radius: 12px; border: 1px dashed var(--border-color);">
+                            <h3 style="font-size: 1.2rem; font-weight: 900; color: var(--text-main);">🏡 No hay propiedades registradas aún</h3>
+                        </div>
+                    `;
+                    return;
+                }
+
+                gridContainer.innerHTML = propiedadesCRM.map(p => {
+                    const foto = p.imagen_principal || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=500&auto=format&fit=crop";
+                    const precioFormateado = "$ " + Number(p.precio_lista).toLocaleString('en-US') + " MXN";
+                    const recVal = Number(p.recamaras) || 0;
+                    const specs = `${recVal > 0 ? recVal + ' Rec. · ' : ''}${p.terreno_m2} m² Terr. · ${p.construccion_m2} m² Const.`;
+                    const ubicacion = `📍 ${p.colonia}, ${p.municipio}`;
+
+                    return `
+                        <div class="proyecto-card" onclick="window.location.href='/propiedad/${p.slug}'">
+                            <span class="card-badge-status">${p.tipo_operacion}</span>
+                            <div class="card-media"><img src="${foto}" alt="${p.titulo}" loading="lazy"></div>
+                            <div class="card-info-content">
+                                <div class="card-meta-tag">${p.tipo_propiedad}</div>
+                                <h3 class="card-main-title">${p.titulo}</h3>
+                                <div class="card-location">${ubicacion}</div>
+                                <div class="card-footer-metrics">
+                                    <div class="metric-price">${precioFormateado}</div>
+                                    <div class="metric-specs">${specs}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error("Error al cargar propiedades:", e);
+            }
+        }
+
+        function ejecutarBusquedaHome() {
+            const textoUbicacion = document.getElementById("inputUbicacionBusqueda").value.trim();
+            const tipoSeleccionado = document.getElementById("select-property-type").value;
+            
+            let urlDestino = `/buscador?tab=${categoriaActivaGlobal}`;
+            if (textoUbicacion) {
+                urlDestino += `&q=${encodeURIComponent(textoUbicacion)}`;
+            }
+            if (tipoSeleccionado) {
+                urlDestino += `&tipo=${encodeURIComponent(tipoSeleccionado)}`;
+            }
+
+            window.location.href = urlDestino;
+        }
+
+        async function solicitarInformesPublico(slugPropiedad) {
+            const nombre = prompt("Ingresa tu Nombre completo para conectar con un Asesor:", "");
+            if (!nombre) return;
+            const telefono = prompt("Ingresa tu Teléfono o WhatsApp de contacto:", "");
+            if (!telefono) return;
+
+            try {
+                const resp = await fetch("/api/prospectos", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        telefono: telefono,
+                        propiedad_interes_slug: slugPropiedad,
+                        presupuesto_maximo: 0,
+                        etapa_kanban: "Nuevo",
+                        asesor_asignado: "Irving Said Díaz Montiel"
+                    })
+                });
+
+                if (resp.ok) {
+                    alert("🏰 ¡Gracias por tu interés! Tu solicitud se registró con éxito en el CRM y se ha alertado al asesor asignado.");
+                } else {
+                    alert("❌ Ocurrió un error al registrar tus datos.");
+                }
+            } catch (err) { console.error(err); }
+        }
+    </script>
+</body>
+</html>

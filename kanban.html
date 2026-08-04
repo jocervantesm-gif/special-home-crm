@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Special Home | Gestión Avanzada de Prospectos</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <style>
+        :root {
+            --bg-body: #F9F7F4;
+            --bg-panel: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --color-primary: #C5A059;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --whatsapp-color: #25D366;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Lato", sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; }
+
+        /* BARRA LATERAL ACTUALIZADA EXACTAMENTE IGUAL AL PORTAL */
+        .sidebar {
+            width: 110px;
+            background-color: #1A1A1A;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 0;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            width: 65px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .brand-logo-img { width: 38px; height: auto; object-fit: contain; display: block; }
+        
+        .brand-text {
+            font-weight: 700;
+            font-size: 7.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #FFFFFF;
+            margin-top: 4px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ÍCONOS FLAT MINIMALISTAS CON TEXTO DEBAJO */
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-icon-box {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #AAA;
+            border-radius: 10px;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active .nav-icon-box, .nav-item:hover .nav-icon-box {
+            background-color: #2D2D2D;
+            color: var(--color-primary);
+        }
+
+        .nav-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #888888;
+            text-align: center;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active .nav-label, .nav-item:hover .nav-label {
+            color: var(--color-primary);
+        }
+
+        .main-content { margin-left: 110px; flex: 1; padding: 35px 40px; width: calc(100% - 110px); }
+
+        .page-header {
+            background: #FFFFFF; border-radius: 16px; padding: 20px 28px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .page-header h1 { font-size: 1.5rem; font-weight: 900; }
+        .filter-select { padding: 10px 16px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; font-weight: 700; outline: none; background: #FFF; cursor: pointer; }
+
+        .kanban-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; align-items: start; }
+        .kanban-column { background-color: #FFFFFF; border: 1px solid var(--border-color); border-radius: 14px; padding: 14px; min-height: 520px; box-shadow: var(--shadow-sm); }
+
+        .col-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 2px solid var(--bg-body); margin-bottom: 12px; }
+        .col-title { font-size: 0.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+        .col-count { background-color: var(--bg-body); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 900; color: var(--text-muted); }
+
+        .cards-list { min-height: 440px; }
+
+        .lead-card {
+            background-color: #FFFFFF; border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02); cursor: pointer; transition: transform 0.2s, filter 0.2s; position: relative;
+        }
+        .lead-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .lead-card.descartado { filter: grayscale(100%); opacity: 0.6; background-color: #ECEFF1; cursor: not-allowed !important; }
+
+        .lead-name { font-size: 0.9rem; font-weight: 900; margin-bottom: 4px; color: var(--text-main); }
+        .lead-phone, .lead-email { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+        .lead-comments { font-size: 0.75rem; background: var(--bg-body); padding: 6px; border-radius: 6px; margin: 8px 0; color: #444; border-left: 3px solid var(--color-primary); }
+        .lead-toolgate-data { font-size: 0.72rem; color: #2E7D32; background: #E8F5E9; padding: 4px 6px; border-radius: 4px; margin-bottom: 8px; }
+        .lead-property { font-size: 0.72rem; font-weight: 700; color: var(--color-primary); margin-bottom: 10px; text-transform: uppercase; }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-color); color: #FFFFFF; border: none; padding: 7px 10px; border-radius: 6px;
+            font-size: 0.72rem; font-weight: 900; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none;
+        }
+
+        /* MODALES */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.6); z-index: 1000;
+            display: none; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: #FFF; padding: 30px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); max-height: 85vh; overflow-y: auto; }
+        .modal-box h3 { font-size: 1.2rem; font-weight: 900; margin-bottom: 15px; color: var(--text-main); }
+        .modal-box label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px; }
+        .modal-box input, .modal-box select, .modal-box textarea { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; margin-bottom: 15px; outline: none; }
+        
+        .history-timeline { font-size: 0.85rem; line-height: 1.6; color: #333; background: var(--bg-body); padding: 15px; border-radius: 8px; white-space: pre-line; margin-bottom: 20px; border-left: 4px solid var(--color-primary); }
+
+        .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; }
+        .btn-modal-cancel { background: #ECEFF1; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+        .btn-modal-save { background: var(--color-primary); color: #FFF; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 900; cursor: pointer; }
+        .btn-modal-danger { background: #D32F2F; color: #FFF; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 900; cursor: pointer; }
+        .btn-modal-success { background: #2E7D32; color: #FFF; border: none; padding: 10px 16px; border-radius: 6px; font-weight: 900; cursor: pointer; }
+
+        @media (max-width: 1100px) { .kanban-board { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <a href="/" class="sidebar-brand">
+            <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home" class="brand-logo-img">
+            <div class="brand-text">Special Home</div>
+        </a>
+
+        <a href="/portal" class="nav-item">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="nav-label">Portal</span>
+        </a>
+
+        <a href="/kanban" class="nav-item active">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <span class="nav-label">Kanban</span>
+        </a>
+
+        <a href="/alta-propiedad" class="nav-item">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <span class="nav-label">Propiedad</span>
+        </a>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>Monitoreo de Pipeline Inmobiliario</h1>
+                <p>🔒 Candados KAM activos: Validaciones financieras, cronológicas y bitácora completa de historial.</p>
+            </div>
+            <select id="selectFiltroPropiedad" class="filter-select" onchange="cargarKanban()">
+                <option value="todas">🏠 Filtrar: Todas las propiedades</option>
+            </select>
+        </div>
+
+        <div class="kanban-board">
+            <div class="kanban-column">
+                <div class="col-header"><span class="col-title">NUEVO</span><span class="col-count" id="count-nuevo">0</span></div>
+                <div class="cards-list" id="col-nuevo" data-etapa="Nuevo" data-index="0"></div>
+            </div>
+
+            <div class="kanban-column">
+                <div class="col-header"><span class="col-title">CONTACTADO</span><span class="col-count" id="count-contactado">0</span></div>
+                <div class="cards-list" id="col-contactado" data-etapa="Contactado" data-index="1"></div>
+            </div>
+
+            <div class="kanban-column">
+                <div class="col-header"><span class="col-title">CITA AGENDADA</span><span class="col-count" id="count-cita">0</span></div>
+                <div class="cards-list" id="col-cita" data-etapa="Cita Agendada" data-index="2"></div>
+            </div>
+
+            <div class="kanban-column">
+                <div class="col-header"><span class="col-title">NEGOCIACIÓN</span><span class="col-count" id="count-negociacion">0</span></div>
+                <div class="cards-list" id="col-negociacion" data-etapa="Negociación" data-index="3"></div>
+            </div>
+
+            <div class="kanban-column">
+                <div class="col-header"><span class="col-title">CIERRE</span><span class="col-count" id="count-cierre">0</span></div>
+                <div class="cards-list" id="col-cierre" data-etapa="Cierre" data-index="4"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL DE TOOLGATE OBLIGATORIO -->
+    <div class="modal-overlay" id="toolgateModal">
+        <div class="modal-box">
+            <h3 id="modalTitle">Completar Toolgate</h3>
+            <div id="modalBody"></div>
+            <div class="modal-buttons" id="modalButtonsContainer">
+                <button class="btn-modal-cancel" onclick="cancelarMovimiento()">Cancelar</button>
+                <button class="btn-modal-save" onclick="guardarToolgateYConstatar()">Guardar y Avanzar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE HISTORIAL COMPLETO (AL CLIC EN TARJETA) -->
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-box">
+            <h3 id="historyModalTitle">Historial del Prospecto</h3>
+            <div class="history-timeline" id="historyTimelineContent">Cargando bitácora...</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn-modal-danger" id="btnReagendarCita" style="display:none;" onclick="abrirModalReagendar()">📅 Reagendar Cita</button>
+                <button class="btn-modal-cancel" onclick="cerrarModalHistorial()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ordenEtapas = ["Nuevo", "Contactado", "Cita Agendada", "Negociación", "Cierre"];
+        let prospectosGlobal = [];
+        let movimientoPendiente = null;
+        let prospectoSeleccionadoId = null;
+
+        async function cargarDropdownPropiedades() {
+            try {
+                const res = await fetch("/api/propiedades");
+                const data = await res.json();
+                const select = document.getElementById("selectFiltroPropiedad");
+                const urlParams = new URLSearchParams(window.location.search);
+                const propUrl = urlParams.get("propiedad");
+
+                select.innerHTML = '<option value="todas">🏠 Filtrar: Todas las propiedades</option>';
+                (data.propiedades || []).forEach(p => {
+                    const selected = (p.slug === propUrl) ? "selected" : "";
+                    select.innerHTML += `<option value="${p.slug}" ${selected}>${p.titulo} (${p.colonia})</option>`;
+                });
+                cargarKanban();
+            } catch (e) { console.error(e); }
+        }
+
+        async function cargarKanban() {
+            const slugFiltro = document.getElementById("selectFiltroPropiedad").value;
+            const url = slugFiltro && slugFiltro !== "todas" ? `/api/prospectos?propiedad_slug=${slugFiltro}` : "/api/prospectos";
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                prospectosGlobal = data.prospectos || [];
+
+                const cols = {
+                    "Nuevo": { el: document.getElementById("col-nuevo"), count: 0 },
+                    "Contactado": { el: document.getElementById("col-contactado"), count: 0 },
+                    "Cita Agendada": { el: document.getElementById("col-cita"), count: 0 },
+                    "Negociación": { el: document.getElementById("col-negociacion"), count: 0 },
+                    "Cierre": { el: document.getElementById("col-cierre"), count: 0 }
+                };
+
+                Object.keys(cols).forEach(key => { if(cols[key].el) cols[key].el.innerHTML = ""; });
+
+                prospectosGlobal.forEach(p => {
+                    const etapa = p.etapa_kanban || "Nuevo";
+                    const colTarget = cols[etapa] || cols["Nuevo"];
+                    const isDescartado = p.estatus_lead === "Descartado";
+                    
+                    if (colTarget && colTarget.el) {
+                        colTarget.count++;
+                        colTarget.el.innerHTML += `
+                            <div class="lead-card ${isDescartado ? 'descartado' : ''}" data-id="${p.id}" data-etapa="${etapa}" onclick="verHistorialProspecto(${p.id})">
+                                <div class="lead-name">${p.nombre} ${isDescartado ? '❌ [DESCARTADO]' : ''}</div>
+                                <div class="lead-phone">📱 ${p.telefono}</div>
+                                ${p.email ? `<div class="lead-email">✉️ ${p.email}</div>` : ''}
+                                ${p.comentarios ? `<div class="lead-comments">💬 "${p.comentarios}"</div>` : ''}
+                                ${p.datos_seguimiento ? `<div class="lead-toolgate-data">📋 ${p.datos_seguimiento}</div>` : ''}
+                                <div class="lead-property">🏠 Ref: ${p.propiedad_interes}</div>
+                                <button class="btn-whatsapp" onclick="event.stopPropagation(); abrirWhatsApp(${p.id})">💬 WhatsApp Directo</button>
+                            </div>
+                        `;
+                    }
+                });
+
+                document.getElementById("count-nuevo").innerText = cols["Nuevo"].count;
+                document.getElementById("count-contactado").innerText = cols["Contactado"].count;
+                document.getElementById("count-cita").innerText = cols["Cita Agendada"].count;
+                document.getElementById("count-negociacion").innerText = cols["Negociación"].count;
+                document.getElementById("count-cierre").innerText = cols["Cierre"].count;
+
+            } catch (err) { console.error(err); }
+        }
+
+        // CONFIGURAR DRAG & DROP ESTRICTO
+        document.querySelectorAll('.cards-list').forEach(col => {
+            new Sortable(col, {
+                group: 'kanban-board',
+                animation: 150,
+                onEnd: function (evt) {
+                    const itemEl = evt.item;
+                    const leadId = itemEl.getAttribute('data-id');
+                    const etapaOriginal = itemEl.getAttribute('data-etapa');
+                    const nuevaEtapa = evt.to.getAttribute('data-etapa');
+
+                    const leadObj = prospectosGlobal.find(x => x.id == leadId);
+                    if (leadObj && leadObj.estatus_lead === "Descartado") {
+                        alert("❌ Este prospecto está descartado y bloqueado. No puede avanzar ni retroceder.");
+                        cargarKanban();
+                        return;
+                    }
+
+                    if (etapaOriginal === nuevaEtapa) return;
+
+                    const indexOriginal = ordenEtapas.indexOf(etapaOriginal);
+                    const indexNuevo = ordenEtapas.indexOf(nuevaEtapa);
+
+                    if (indexNuevo < indexOriginal) {
+                        alert("🔒 Candado KAM: No se permite regresar a un prospecto a una etapa anterior.");
+                        cargarKanban();
+                        return;
+                    }
+
+                    if (indexNuevo > indexOriginal) {
+                        movimientoPendiente = { leadId, nuevaEtapa, cardEl: itemEl, propiedadSlug: leadObj.propiedad_interes };
+                        abrirModalToolgate(nuevaEtapa, leadId);
+                        cargarKanban();
+                    }
+                }
+            });
+        });
+
+        // 1. VISUALIZAR HISTORIAL COMPLETO AL HACER CLIC EN LA TARJETA
+        function verHistorialProspecto(id) {
+            prospectoSeleccionadoId = id;
+            const p = prospectosGlobal.find(x => x.id == id);
+            if (!p) return;
+
+            document.getElementById("historyModalTitle").innerText = `Bitácora: ${p.nombre}`;
+            document.getElementById("historyTimelineContent").innerText = p.historial_toolgates || "Sin registros previos en el historial.";
+            
+            const btnReagendar = document.getElementById("btnReagendarCita");
+            if (p.etapa_kanban === "Cita Agendada" && p.estatus_lead !== "Descartado") {
+                btnReagendar.style.display = "block";
+            } else {
+                btnReagendar.style.display = "none";
+            }
+
+            document.getElementById("historyModal").classList.add("active");
+        }
+
+        function cerrarModalHistorial() {
+            document.getElementById("historyModal").classList.remove("active");
+            prospectoSeleccionadoId = null;
+        }
+
+        function abrirModalToolgate(etapa, leadId) {
+            const modal = document.getElementById("toolgateModal");
+            const title = document.getElementById("modalTitle");
+            const body = document.getElementById("modalBody");
+            const buttonsContainer = document.getElementById("modalButtonsContainer");
+
+            title.innerText = `Toolgate Obligatorio: ${etapa}`;
+            
+            if (etapa === "Contactado") {
+                body.innerHTML = `
+                    <label>Medio de Contacto:</label>
+                    <select id="tg-medio"><option value="WhatsApp">WhatsApp</option><option value="Llamada Telefónica">Llamada Telefónica</option><option value="Correo Electrónico">Correo Electrónico</option></select>
+                    <label>Resultado / Nivel de Interés:</label>
+                    <textarea id="tg-notas" placeholder="Ej. Muy interesado, pide cita presencial..." rows="3"></textarea>
+                `;
+                buttonsContainer.innerHTML = `
+                    <button class="btn-modal-cancel" onclick="cancelarMovimiento()">Cancelar</button>
+                    <button class="btn-modal-save" onclick="guardarToolgateYConstatar()">Guardar y Avanzar</button>
+                `;
+            } else if (etapa === "Cita Agendada") {
+                body.innerHTML = `
+                    <label>Fecha y Hora de Visita (Debe ser posterior al contacto previo):</label>
+                    <input type="datetime-local" id="tg-fecha">
+                    <label>Tipo de Visita:</label>
+                    <select id="tg-tipo"><option value="Presencial en Propiedad">Presencial en Propiedad</option><option value="Videollamada VIP">Videollamada VIP</option><option value="Open House">Open House</option></select>
+                `;
+                buttonsContainer.innerHTML = `
+                    <button class="btn-modal-danger" onclick="descartarProspecto(${leadId})">❌ Descartar Prospecto</button>
+                    <button class="btn-modal-success" onclick="guardarToolgateYConstatar()">✅ Interesado (Agendar)</button>
+                `;
+            } else if (etapa === "Negociación") {
+                body.innerHTML = `
+                    <label>Monto de Oferta Formal (MXN):</label>
+                    <input type="number" id="tg-oferta" placeholder="Ej. 21500000">
+                    <label>Condiciones de Pago:</label>
+                    <select id="tg-pago"><option value="Contado / Recursos Propios">Contado / Recursos Propios</option><option value="Crédito Bancario">Crédito Bancario</option><option value="Cofinavit / Esquema Mixto">Cofinavit / Esquema Mixto</option></select>
+                `;
+                buttonsContainer.innerHTML = `
+                    <button class="btn-modal-cancel" onclick="cancelarMovimiento()">Cancelar</button>
+                    <button class="btn-modal-save" onclick="guardarToolgateYConstatar()">Guardar y Avanzar</button>
+                `;
+            } else if (etapa === "Cierre") {
+                body.innerHTML = `
+                    <label>Folio de Apartado / Contrato:</label>
+                    <input type="text" id="tg-folio" placeholder="SH-2026-998">
+                    <label>Fecha Estimada de Firma (Posterior a Negociación):</label>
+                    <input type="date" id="tg-firma">
+                `;
+                buttonsContainer.innerHTML = `
+                    <button class="btn-modal-cancel" onclick="cancelarMovimiento()">Cancelar</button>
+                    <button class="btn-modal-save" onclick="guardarToolgateYConstatar()">Guardar y Avanzar</button>
+                `;
+            }
+
+            modal.classList.add("active");
+        }
+
+        async function guardarToolgateYConstatar() {
+            if (!movimientoPendiente) return;
+
+            let textoSeguimiento = "";
+            let historialLinea = "";
+            const etapa = movimientoPendiente.nuevaEtapa;
+
+            if (etapa === "Contactado") {
+                const medio = document.getElementById("tg-medio").value;
+                const notas = document.getElementById("tg-notas").value;
+                if (!notas) { alert("⚠️ El campo de notas es obligatorio."); return; }
+                textoSeguimiento = `[Contactado vía ${medio}]: ${notas}`;
+                historialLinea = `🟢 [Contactado vía ${medio}]: ${notas}`;
+            } else if (etapa === "Cita Agendada") {
+                const fechaStr = document.getElementById("tg-fecha").value;
+                const tipo = document.getElementById("tg-tipo").value;
+                if (!fechaStr) { alert("⚠️ Debe seleccionar la fecha y hora de la cita."); return; }
+
+                const fechaCita = new Date(fechaStr);
+                const ahora = new Date();
+                if (fechaCita <= ahora) {
+                    alert("❌ Candado KAM: La fecha de la cita no puede ser en el pasado o en el mismo momento actual. Debe ser un día posterior.");
+                    return;
+                }
+
+                textoSeguimiento = `[Cita Agendada]: ${tipo} el ${fechaStr}`;
+                historialLinea = `🟢 [Cita Agendada]: ${tipo} el ${fechaStr}`;
+            } else if (etapa === "Negociación") {
+                const oferta = parseFloat(document.getElementById("tg-oferta").value);
+                const pago = document.getElementById("tg-pago").value;
+                if (isNaN(oferta) || oferta <= 0) { alert("⚠️ Debe ingresar un monto de oferta válido."); return; }
+
+                try {
+                    const resMin = await fetch(`/api/propiedades/slug/${movimientoPendiente.propiedadSlug}/oferta-minima`);
+                    const dataMin = await resMin.json();
+                    const ofertaMinima = dataMin.precio_minimo_oferta || 0;
+
+                    if (oferta < ofertaMinima) {
+                        alert(`❌ Candado Financiero KAM: La oferta ingresada ($${oferta.toLocaleString()}) es menor a la oferta mínima aceptable ($${ofertaMinima.toLocaleString()}) para este inmueble.`);
+                        return;
+                    }
+                } catch (e) {
+                    console.error("Error al validar oferta mínima:", e);
+                }
+
+                textoSeguimiento = `[Negociación]: Oferta $${oferta.toLocaleString()} (${pago})`;
+                historialLinea = `🟢 [Negociación]: Oferta $${oferta.toLocaleString()} (${pago})`;
+            } else if (etapa === "Cierre") {
+                const folio = document.getElementById("tg-folio").value;
+                const firma = document.getElementById("tg-firma").value;
+                if (!folio || !firma) { alert("⚠️ Todos los campos de cierre son obligatorios."); return; }
+
+                textoSeguimiento = `[Cierre Exitoso]: Folio ${folio}, Firma: ${firma}`;
+                historialLinea = `🟢 [Cierre Exitoso]: Folio ${folio}, Firma estimada: ${firma}`;
+            }
+
+            await fetch(`/api/prospectos/${movimientoPendiente.leadId}/etapa`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    etapa_kanban: etapa, 
+                    datos_seguimiento: textoSeguimiento,
+                    historial_toolgates: historialLinea,
+                    estatus_lead: "Activo"
+                })
+            });
+
+            cerrarModalToolgate();
+            cargarKanban();
+        }
+
+        async function descartarProspecto(leadId) {
+            const motivo = prompt("Indique el motivo del descarte del prospecto:", "Cliente sin presupuesto / No interesado");
+            if (!motivo) return;
+
+            const historialLinea = `❌ [DESCARTADO]: ${motivo}`;
+
+            await fetch(`/api/prospectos/${leadId}/etapa`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    etapa_kanban: "Contactado",
+                    datos_seguimiento: "DESCARTADO",
+                    historial_toolgates: historialLinea,
+                    estatus_lead: "Descartado"
+                })
+            });
+
+            cerrarModalToolgate();
+            cargarKanban();
+        }
+
+        function abrirModalReagendar() {
+            if (!prospectoSeleccionadoId) return;
+            const leadId = prospectoSeleccionadoId;
+            cerrarModalHistorial();
+
+            const modal = document.getElementById("toolgateModal");
+            document.getElementById("modalTitle").innerText = "Reagendar Cita con Prospecto";
+            document.getElementById("modalBody").innerHTML = `
+                <label>Nueva Fecha y Hora de Visita:</label>
+                <input type="datetime-local" id="reagendar-fecha">
+                <label>Motivo de Reagenda:</label>
+                <textarea id="reagendar-motivo" placeholder="Ej. Cliente solicitó mover la fecha por motivos de viaje..." rows="3"></textarea>
+            `;
+            document.getElementById("modalButtonsContainer").innerHTML = `
+                <button class="btn-modal-cancel" onclick="cerrarModalToolgate()">Cancelar</button>
+                <button class="btn-modal-save" onclick="guardarReagenda(${leadId})">Guardar Nueva Cita</button>
+            `;
+            modal.classList.add("active");
+        }
+
+        async function guardarReagenda(leadId) {
+            const fechaStr = document.getElementById("reagendar-fecha").value;
+            const motivo = document.getElementById("reagendar-motivo").value;
+            if (!fechaStr || !motivo) { alert("⚠️ Todos los campos son obligatorios para reagendar."); return; }
+
+            const historialLinea = `📅 [CITA REAGENDADA]: ${motivo} - Nueva fecha: ${fechaStr}`;
+            const datosSeguimiento = `[Cita Reagendada]: ${fechaStr}`;
+
+            await fetch(`/api/prospectos/${leadId}/etapa`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    etapa_kanban: "Cita Agendada", 
+                    datos_seguimiento: datosSeguimiento,
+                    historial_toolgates: historialLinea,
+                    estatus_lead: "Activo"
+                })
+            });
+
+            cerrarModalToolgate();
+            cargarKanban();
+        }
+
+        function cancelarMovimiento() {
+            cerrarModalToolgate();
+            cargarKanban();
+        }
+
+        function cerrarModalToolgate() {
+            document.getElementById("toolgateModal").classList.remove("active");
+            movimientoPendiente = null;
+        }
+
+        async function abrirWhatsApp(prospectoId) {
+            const res = await fetch(`/api/prospectos/${prospectoId}/whatsapp-link`);
+            const data = await res.json();
+            if (data.whatsapp_url) window.open(data.whatsapp_url, '_blank');
+        }
+
+        cargarDropdownPropiedades();
+    </script>
+</body>
+</html>

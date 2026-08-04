@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title id="seo-title">Ficha de Propiedad | Special Home</title>
+    <meta name="description" id="seo-desc" content="Propiedad de lujo verificada y curada por Special Home en México.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://specialhome.com.mx/propiedad/">
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" id="og-title" content="Ficha de Propiedad | Special Home">
+    <meta property="og:description" id="og-desc" content="Explora los detalles de este activo inmobiliario exclusivo en Special Home.">
+    <meta property="og:image" id="og-image" content="https://specialhome.com.mx/static/logo%20sh_Mesa%20de%20trabajo%201.png">
+
+    <!-- Google Tag Manager (GTM) -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5PF7ZFNP');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #FFFFFF;
+            --bg-neutral: #F9F7F4;
+            --bg-dark: #1A1A1A;
+            --bg-gray-metrics: #F1F3F5;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --color-primary: #C5A059;
+            --color-primary-dark: #A38448;
+            --border-color: #E2E8F0;
+            --max-width: 1200px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box !important; margin: 0; padding: 0; }
+        html { width: 100%; overflow-x: hidden !important; scroll-behavior: smooth; }
+        body { display: block !important; width: 100% !important; background-color: var(--bg-body); color: var(--text-main); font-family: "Lato", sans-serif; -webkit-font-smoothing: antialiased; }
+        
+        /* BLOQUEO TOTAL DE CLIC DERECHO Y ARRASTRE DE IMÁGENES */
+        img { 
+            max-width: 100%; height: auto; display: block; 
+            pointer-events: none; -webkit-user-drag: none; user-select: none; 
+        }
+
+        .container { width: 100%; max-width: var(--max-width); margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+
+        /* NAVEGACIÓN Y HEADER IDÉNTICO AL HOME */
+        .site-header { position: sticky; top: 0; left: 0; width: 100%; z-index: 100; padding: 15px 0; background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%); backdrop-filter: blur(4px); transition: background 0.3s; background-color: #1A1A1A; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+        .header-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .nav-brand { display: flex; flex-direction: column; align-items: center; width: 65px; flex-shrink: 0; text-decoration: none; }
+        .brand-logo-img { width: 42px; height: auto; object-fit: contain; display: block; }
+        .brand-text { font-weight: 900; font-size: 7px; text-transform: uppercase; letter-spacing: 0.8px; color: #FFFFFF; margin-top: 4px; text-align: center; white-space: nowrap; }
+
+        .desktop-nav { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 16px; list-style: none; align-items: center; }
+        .nav-links a { color: #FFFFFF; text-decoration: none; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; transition: color 0.2s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--color-primary); }
+
+        .btn-nav-action { background-color: transparent; border: 2px solid #FFFFFF; padding: 7px 16px; border-radius: 6px; color: #FFFFFF; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+        .btn-nav-action:hover { background-color: #FFFFFF; color: var(--text-main); }
+
+        .mobile-hamburger { display: none; background: none; border: none; color: #FFFFFF; font-size: 1.8rem; cursor: pointer; padding: 5px; }
+
+        /* DRAWER MÓVIL */
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0,0,0,0.7); z-index: 199; display: none; }
+        .drawer-overlay.active { display: block; }
+        .mobile-drawer { position: fixed; top: 0; right: 0; width: 85%; max-width: 280px; height: 100vh; background-color: rgba(20, 20, 20, 0.98); backdrop-filter: blur(15px); z-index: 200; display: none; flex-direction: column; padding: 25px; box-shadow: -5px 0 25px rgba(0,0,0,0.5); }
+        .mobile-drawer.active { display: flex; }
+        .drawer-close { align-self: flex-end; background: none; border: none; color: #FFFFFF; font-size: 1.8rem; cursor: pointer; margin-bottom: 25px; }
+        .mobile-drawer-links { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+        .mobile-drawer-links a { color: #FFFFFF; text-decoration: none; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
+        .mobile-drawer-btn { margin-top: 25px; background-color: var(--color-primary); color: #FFFFFF; border: none; padding: 12px; border-radius: 6px; font-weight: 900; text-transform: uppercase; cursor: pointer; width: 100%; }
+
+        /* BREADCRUMB */
+        .breadcrumb { padding: 15px 0; background-color: var(--bg-neutral); font-size: 0.8rem; color: var(--text-muted); border-bottom: 1px solid var(--border-color); margin-bottom: 10px; }
+        .breadcrumb a { color: var(--text-main); text-decoration: none; font-weight: 700; }
+
+        /* HEADER DE PROPIEDAD */
+        .property-page-flow { display: flex; flex-direction: column; }
+        .mobile-property-header-section { padding-top: 10px; padding-bottom: 10px; }
+        .gallery-section { order: 1; padding-top: 10px; padding-bottom: 20px; }
+        .main-content-wrapper { order: 2; }
+
+        .property-header { border-bottom: 1px solid var(--border-color); padding-bottom: 25px; margin-bottom: 30px; }
+        .property-tags { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+        .badge-status { background-color: var(--bg-dark); color: #FFFFFF; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; }
+        .badge-verified { background-color: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; display: flex; align-items: center; gap: 4px; }
+
+        .property-title { font-size: 2.2rem; font-weight: 900; line-height: 1.2; margin-bottom: 8px; color: var(--text-main); }
+        .property-address { font-size: 1rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+
+        /* GALERÍA GRID */
+        .gallery-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, 220px); gap: 10px; border-radius: 12px; overflow: hidden; position: relative; }
+        .gallery-item { position: relative; overflow: hidden; background-color: #EEE; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item.main { grid-column: 1 / 2; grid-row: 1 / 3; }
+
+        .btn-see-more-photos { position: absolute; bottom: 15px; right: 15px; background-color: rgba(26, 26, 26, 0.85); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.3); padding: 10px 18px; border-radius: 6px; font-size: 0.8rem; font-weight: 900; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(4px); z-index: 2; }
+
+        /* LIGHTBOX MODAL */
+        .carousel-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0, 0, 0, 0.95); z-index: 1000; display: none; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .carousel-modal.active { display: flex; }
+        .carousel-header { width: 100%; max-width: var(--max-width); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; color: #FFFFFF; }
+        .carousel-counter { font-size: 0.9rem; font-weight: 700; color: var(--color-primary); }
+        .carousel-close { background: none; border: none; color: #FFFFFF; font-size: 2rem; cursor: pointer; }
+        .carousel-stage { position: relative; width: 100%; max-width: 1000px; height: 70vh; display: flex; justify-content: center; align-items: center; padding: 0 50px; }
+        .carousel-img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 6px; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255, 255, 255, 0.1); color: #FFFFFF; border: none; font-size: 2rem; padding: 15px 12px; cursor: pointer; }
+        .carousel-btn.prev { left: 10px; } .carousel-btn.next { right: 10px; }
+
+        /* LAYOUT PRINCIPAL */
+        .property-main-layout { display: grid; grid-template-columns: 1fr 360px; gap: 40px; padding-top: 30px; padding-bottom: 60px; }
+        .specs-bar { display: flex; justify-content: space-between; background-color: var(--bg-neutral); padding: 20px 25px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 35px; }
+        .spec-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .spec-value { font-size: 1.3rem; font-weight: 900; color: var(--text-main); }
+        .spec-label { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-top: 2px; }
+
+        .info-section { margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 35px; }
+        .section-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 20px; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.5px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 40px; height: 3px; background-color: var(--color-primary); margin-top: 6px; }
+        .property-description { font-size: 1rem; line-height: 1.7; color: #4A5568; }
+
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .feature-card { background-color: var(--bg-gray-metrics); padding: 15px 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .feature-concept { display: flex; align-items: center; gap: 12px; }
+        .feature-icon-svg { width: 18px; height: 18px; fill: var(--color-primary); flex-shrink: 0; }
+        .feature-name { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .feature-val { font-size: 0.8rem; font-weight: 900; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .map-container { width: 100%; height: 400px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); margin-top: 10px; }
+        .map-container iframe { width: 100% !important; height: 100% !important; border: 0; }
+
+        /* SIDEBAR */
+        .sidebar-sticky { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 25px; }
+        .pricing-card { background-color: #FFFFFF; border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .price-header { margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .price-label { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; color: var(--color-primary-dark); }
+        .price-amount { font-size: 2.2rem; font-weight: 900; color: var(--text-main); margin-top: 4px; }
+        .price-subtext { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; }
+
+        .advisor-profile { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background-color: var(--bg-neutral); padding: 15px; border-radius: 8px; }
+        .advisor-avatar { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-primary); }
+        .advisor-info .name { font-weight: 900; font-size: 0.95rem; color: var(--text-main); }
+        .advisor-info .role { font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--color-primary-dark); }
+
+        .contact-form { display: flex; flex-direction: column; gap: 12px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; outline: none; }
+        .btn-action-primary { background: linear-gradient(135deg, #C5A059 0%, #A38448 100%); color: #FFFFFF; border: none; padding: 14px; border-radius: 6px; font-weight: 900; text-transform: uppercase; cursor: pointer; text-align: center; }
+
+        /* FOOTER IDÉNTICO AL HOME */
+        .site-footer { background-color: #1A1A1A; color: #FFFFFF; padding: 60px 0 30px; border-top: 4px solid var(--color-primary); width: 100%; margin-top: 60px; }
+        .footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 30px; border-bottom: 1px solid #2D2D2D; padding-bottom: 40px; }
+        .footer-brand-col { display: flex; flex-direction: column; gap: 12px; }
+        .footer-brand-col p { font-size: 0.8rem; color: #888; line-height: 1.5; }
+        .footer-links-col h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 20px; font-weight: 900; }
+        .footer-links-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links-col ul a { color: #AAA; text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: color 0.2s; }
+        .footer-links-col ul a:hover { color: #FFFFFF; }
+        .footer-bottom { padding-top: 30px; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #666; width: 100%; }
+        .footer-bottom-links { display: flex; gap: 15px; }
+        .footer-bottom-links a { color: #666; text-decoration: none; font-weight: 700; }
+
+        @media (max-width: 900px) {
+            .desktop-nav { display: none !important; }
+            .mobile-hamburger { display: block !important; }
+            .property-main-layout { grid-template-columns: 1fr; }
+            .gallery-grid { display: flex !important; overflow-x: auto !important; gap: 10px; }
+            .gallery-item { flex: 0 0 85% !important; height: 260px !important; }
+            .specs-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 20px; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PF7ZFNP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <aside class="mobile-drawer" id="mobile-drawer">
+        <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar Menú">✕</button>
+        <ul class="mobile-drawer-links">
+            <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+            <li><a href="/buscador?tab=preventa">Preventa</a></li>
+            <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+            <li><a href="/buscador?tab=comercial">Comercial</a></li>
+            <li><a href="/soluciones-b2b">Soluciones B2B y Proyectos</a></li>
+        </ul>
+        <button class="mobile-drawer-btn" onclick="window.location.href='/portal'">Portal del Asesor</button>
+    </aside>
+
+    <!-- HEADER SITE CON LOGO PNG OFICIAL -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="/" class="nav-brand" aria-label="Inicio Special Home">
+                <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home Logo" class="brand-logo-img">
+                <div class="brand-text">Special Home</div>
+            </a>
+
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+                    <li><a href="/buscador?tab=preventa">Preventa</a></li>
+                    <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+                    <li><a href="/buscador?tab=comercial">Comercial</a></li>
+                    <li><a href="/soluciones-b2b" style="color: var(--color-primary);">Soluciones B2B y Proyectos</a></li>
+                </ul>
+                <button class="btn-nav-action" onclick="window.location.href='/portal'">Portal del Asesor</button>
+            </nav>
+
+            <button class="mobile-hamburger" id="hamburger-btn" aria-label="Abrir Menú">☰</button>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <div class="container" id="breadcrumb-text">Inicio / Propiedades / <span id="bread-prop">Cargando...</span></div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="property-page-flow">
+
+        <section class="mobile-property-header-section">
+            <div class="container">
+                <div class="property-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
+                    <div class="property-tags">
+                        <span class="badge-status" id="badge-operacion">Venta</span>
+                        <span class="badge-verified">✓ Special Home Verificado</span>
+                    </div>
+                    <h1 class="property-title" id="prop-titulo">Cargando propiedad...</h1>
+                    <div class="property-address" id="prop-direccion">📍 Ubicación...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERÍA GRID DINÁMICA -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="gallery-grid" id="main-gallery"></div>
+            </div>
+        </section>
+
+        <!-- CONTENIDO Y SIDEBAR -->
+        <div class="main-content-wrapper">
+            <main class="container">
+                <div class="property-main-layout">
+                    
+                    <div class="property-content">
+                        <!-- SPECS -->
+                        <div class="specs-bar">
+                            <div class="spec-item"><span class="spec-value" id="spec-terreno">0 m²</span><span class="spec-label">Terreno</span></div>
+                            <div class="spec-item"><span class="spec-value" id="spec-const">0 m²</span><span class="spec-label">Construcción</span></div>
+                            <div class="spec-item"><span class="spec-value" id="spec-rec">0</span><span class="spec-label">Recámaras</span></div>
+                            <div class="spec-item"><span class="spec-value" id="spec-banos">0</span><span class="spec-label">Baños</span></div>
+                            <div class="spec-item"><span class="spec-value" id="spec-est">0</span><span class="spec-label">Estacionamientos</span></div>
+                        </div>
+
+                        <!-- DESCRIPCIÓN -->
+                        <div class="info-section">
+                            <h2 class="section-title">Descripción General</h2>
+                            <p class="property-description" id="prop-descripcion">Cargando detalles...</p>
+                        </div>
+
+                        <!-- AMENIDADES DINÁMICAS GUARDADAS DESDE EL CRM -->
+                        <div class="info-section" id="section-amenidades">
+                            <h2 class="section-title">Amenidades e Infraestructura</h2>
+                            <div class="features-grid" id="amenidades-grid"></div>
+                        </div>
+
+                        <!-- UBICACIÓN MAPA -->
+                        <div class="info-section" id="section-mapa">
+                            <h2 class="section-title">Ubicación y Conectividad</h2>
+                            <div class="map-container" id="map-iframe-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- SIDEBAR DINÁMICO CON ASESOR Y VALUADOR -->
+                    <aside class="property-sidebar">
+                        <div class="sidebar-sticky">
+                            <div class="pricing-card">
+                                <div class="price-header">
+                                    <div class="price-label">Valor de Comercialización Recomendado</div>
+                                    <div class="price-amount" id="prop-precio">$ 0 MXN</div>
+                                    <div class="price-subtext" id="prop-precio-min"></div>
+                                </div>
+
+                                <!-- ASESOR DINÁMICO -->
+                                <div class="advisor-profile">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop" alt="Asesor Inmobiliario Special Home" class="advisor-avatar">
+                                    <div class="advisor-info">
+                                        <div class="name" id="asesor-nombre">Irving Said Díaz Montiel</div>
+                                        <div class="role">Asesor Opcionador Senior</div>
+                                        <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;" id="valuador-nombre">Valuador: Ing. Kitlanezi León Soto</div>
+                                    </div>
+                                </div>
+
+                                <form class="contact-form" onsubmit="enviarLeadFormulario(event)">
+                                    <input type="text" id="lead-nombre" class="form-input" placeholder="Nombre completo *" required>
+                                    <input type="email" id="lead-email" class="form-input" placeholder="Correo electrónico">
+                                    <input type="tel" id="lead-telefono" class="form-input" placeholder="Teléfono de contacto *" required>
+                                    <textarea id="lead-mensaje" class="form-input" rows="3" placeholder="Hola, me interesa obtener información sobre esta propiedad..."></textarea>
+                                    
+                                    <button type="submit" class="btn-action-primary">Contactar Asesor</button>
+                                </form>
+                            </div>
+                        </div>
+                    </aside>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div class="carousel-modal" id="carousel-modal">
+        <div class="carousel-header">
+            <span class="carousel-counter" id="carousel-counter">Fotografía 1</span>
+            <button class="carousel-close" onclick="closeCarousel()">✕</button>
+        </div>
+        <div class="carousel-stage">
+            <button class="carousel-btn prev" onclick="updateCarousel(currentIndex - 1)">&#10094;</button>
+            <img src="" class="carousel-img" id="carousel-active-img">
+            <button class="carousel-btn next" onclick="updateCarousel(currentIndex + 1)">&#10095;</button>
+        </div>
+    </div>
+
+    <!-- FOOTER COMPLETO IDÉNTICO AL HOME -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <a href="/" class="nav-brand" style="margin-bottom: 5px;">
+                        <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home" class="brand-logo-img" style="width: 42px;">
+                    </a>
+                    <h4 style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: #FFF; font-weight: 900; margin-top: 5px;">Special Home</h4>
+                    <p>La plataforma tecnológica de corretaje y curaduría para el mercado residencial de lujo, naves industriales, activos comerciales y soluciones jurídicas en México.</p>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>Menú Principal</h4>
+                    <ul>
+                        <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+                        <li><a href="/buscador?tab=preventa">Preventa</a></li>
+                        <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+                        <li><a href="/buscador?tab=comercial">Comercial</a></li>
+                        <li><a href="/soluciones-b2b">Soluciones Jurídicas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Regiones Premium</h4>
+                    <ul>
+                        <li><a href="#">San Pedro Garza García</a></li>
+                        <li><a href="#">Lomas de Chapultepec</a></li>
+                        <li><a href="#">Puerta de Hierro</a></li>
+                        <li><a href="#">Punta Mita Exclusive</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Corporativo</h4>
+                    <ul>
+                        <li><a href="#">Quiénes Somos</a></li>
+                        <li><a href="#">Unirse como Asesor</a></li>
+                        <li><a href="#">Market Insights</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 specialhome.com.mx. Todos los derechos reservados.</div>
+                <div class="footer-bottom-links">
+                    <a href="#">Aviso de Privacidad</a>
+                    <a href="#">Términos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerCloseBtn = document.getElementById('drawer-close-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+
+            function openDrawer() { mobileDrawer.classList.add('active'); drawerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            function closeDrawer() { mobileDrawer.classList.remove('active'); drawerOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+
+            if(hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+            if(drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+            if(drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+            // Bloquear clic derecho global en todas las imágenes
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('contextmenu', e => e.preventDefault());
+            });
+
+            cargarPropiedadIndividual();
+        });
+
+        let propertyImages = [];
+        let currentIndex = 0;
+        let slugActual = window.location.pathname.split("/").pop();
+
+        async function cargarPropiedadIndividual() {
+            try {
+                const res = await fetch(`/api/propiedades/slug/${slugActual}`);
+                if (!res.ok) { alert("Propiedad no encontrada"); window.location.href = "/"; return; }
+                const p = await res.json();
+
+                // Actualización SEO Dinámica por Propiedad para Google y Redes Sociales
+                const tituloSEO = `${p.titulo} | ${p.tipo_propiedad} en ${p.municipio}, ${p.estado} - Special Home`;
+                const descSEO = `Venta / Renta de ${p.tipo_propiedad.toLowerCase()} en ${p.colonia}, ${p.municipio}. Superficie: ${p.terreno_m2} m². Precio: $${Number(p.precio_lista).toLocaleString('en-US')} MXN. ¡Conócelo!`;
+                
+                document.getElementById("seo-title").innerText = tituloSEO;
+                document.querySelector('meta[name="description"]').setAttribute("content", descSEO);
+                document.getElementById("og-title").setAttribute("content", tituloSEO);
+                document.getElementById("og-desc").setAttribute("content", descSEO);
+                
+                const fotoPrincipal = p.imagen_principal || "https://specialhome.com.mx/static/logo%20sh_Mesa%20de%20trabajo%201.png";
+                document.getElementById("og-image").setAttribute("content", fotoPrincipal);
+
+                document.getElementById("prop-titulo").innerText = p.titulo;
+                document.getElementById("bread-prop").innerText = p.titulo;
+                document.getElementById("prop-direccion").innerText = `📍 ${p.calle_numero}, ${p.colonia}, ${p.municipio}, ${p.estado}`;
+                document.getElementById("badge-operacion").innerText = p.tipo_operacion;
+                document.getElementById("prop-precio").innerText = "$ " + Number(p.precio_lista).toLocaleString('en-US') + " MXN";
+                
+                if (p.precio_minimo_oferta && p.precio_minimo_oferta > 0) {
+                    document.getElementById("prop-precio-min").innerText = "Oferta mínima aceptable: $ " + Number(p.precio_minimo_oferta).toLocaleString('en-US') + " MXN";
+                }
+
+                document.getElementById("spec-terreno").innerText = p.terreno_m2 + " m²";
+                document.getElementById("spec-const").innerText = p.construccion_m2 + " m²";
+                document.getElementById("spec-rec").innerText = p.recamaras || 0;
+                document.getElementById("spec-banos").innerText = (p.banos_completos || 0) + (p.medios_banos || 0);
+                document.getElementById("spec-est").innerText = p.estacionamientos || 0;
+                document.getElementById("prop-descripcion").innerText = p.descripcion || "Sin descripción disponible.";
+
+                // Asesor y Valuador
+                if (p.asesor_opcionador) document.getElementById("asesor-nombre").innerText = p.asesor_opcionador;
+                if (p.valuador) document.getElementById("valuador-nombre").innerText = `Valuador: ${p.valuador}`;
+
+                // Amenidades dinámicas con íconos SVG minimalistas dorados
+                const amenidadesContainer = document.getElementById("amenidades-grid");
+                if (p.equipamiento_cercano) {
+                    const listaAm = p.equipamiento_cercano.split(",");
+                    amenidadesContainer.innerHTML = listaAm.map(am => `
+                        <div class="feature-card">
+                            <div class="feature-concept">
+                                <svg class="feature-icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                <span class="feature-name">${am.trim()}</span>
+                            </div>
+                            <span class="feature-val">Verificado</span>
+                        </div>
+                    `).join('');
+                } else {
+                    document.getElementById("section-amenidades").style.display = "none";
+                }
+
+                // Mapa
+                if (p.google_maps_iframe) {
+                    document.getElementById("map-iframe-container").innerHTML = p.google_maps_iframe;
+                } else {
+                    document.getElementById("section-mapa").style.display = "none";
+                }
+
+                // Galería de fotos
+                propertyImages = [];
+                if (p.imagen_principal) propertyImages.push(p.imagen_principal);
+                if (p.galeria_imagenes) {
+                    p.galeria_imagenes.split(",").forEach(url => { if (url.trim()) propertyImages.push(url.trim()); });
+                }
+                if (propertyImages.length === 0) {
+                    propertyImages.push("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop");
+                }
+
+                renderizarGaleriaGrid();
+
+            } catch (e) { console.error(e); }
+        }
+
+        function renderizarGaleriaGrid() {
+            const container = document.getElementById("main-gallery");
+            container.innerHTML = "";
+
+            propertyImages.slice(0, 5).forEach((url, idx) => {
+                const isMain = idx === 0 ? "main" : "";
+                const buttonSeeMore = idx === 4 || propertyImages.length === 1 ? `<button class="btn-see-more-photos" onclick="event.stopPropagation(); openCarousel(0);">📷 Ver ${propertyImages.length} Fotos</button>` : "";
+
+                container.innerHTML += `
+                    <div class="gallery-item ${isMain}" onclick="openCarousel(${idx})">
+                        <img src="${url}" alt="Fotografía inmueble Special Home ${idx+1}">
+                        ${buttonSeeMore}
+                    </div>
+                `;
+            });
+        }
+
+        function openCarousel(idx) {
+            currentIndex = idx;
+            document.getElementById("carousel-modal").classList.add("active");
+            updateCarousel(currentIndex);
+        }
+
+        function closeCarousel() { document.getElementById("carousel-modal").classList.remove("active"); }
+
+        function updateCarousel(idx) {
+            if (idx < 0) idx = propertyImages.length - 1;
+            if (idx >= propertyImages.length) idx = 0;
+            currentIndex = idx;
+            document.getElementById("carousel-active-img").src = propertyImages[currentIndex];
+            document.getElementById("carousel-counter").innerText = `Fotografía ${currentIndex + 1} de ${propertyImages.length}`;
+        }
+
+        async function enviarLeadFormulario(e) {
+            e.preventDefault();
+            const nombre = document.getElementById("lead-nombre").value;
+            const email = document.getElementById("lead-email").value;
+            const telefono = document.getElementById("lead-telefono").value;
+            const mensaje = document.getElementById("lead-mensaje").value;
+
+            const resp = await fetch("/api/prospectos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nombre: nombre,
+                    email: email,
+                    telefono: telefono,
+                    propiedad_interes_slug: slugActual,
+                    presupuesto_maximo: 0,
+                    etapa_kanban: "Nuevo",
+                    asesor_asignado: document.getElementById("asesor-nombre").innerText,
+                    comentarios: mensaje,
+                    datos_seguimiento: ""
+                })
+            });
+
+            if (resp.ok) {
+                alert("🏰 ¡Solicitud enviada con éxito! Tu información fue registrada en el CRM de Special Home. Un asesor te contactará a la brevedad.");
+                e.target.reset();
+            } else {
+                alert("❌ Ocurrió un error al enviar la solicitud.");
+            }
+        }
+    </script>
+</body>
+</html>

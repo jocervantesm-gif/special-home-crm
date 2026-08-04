@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO OPTIMIZACIÓN MÁXIMA -->
+    <title>Buscador Avanzado de Propiedades y Naves Industriales | Special Home</title>
+    <meta name="description" content="Explora nuestro catálogo verificado de residencias de lujo, preventas exclusivas y naves industriales AAA en México con filtros avanzados.">
+    <meta name="keywords" content="buscador inmobiliario, casas en venta, naves industriales, preventas méxico, special home crm">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://specialhome.com.mx/buscador">
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://specialhome.com.mx/buscador">
+    <meta property="og:title" content="Buscador Avanzado de Propiedades | Special Home">
+    <meta property="og:description" content="Encuentra el activo inmobiliario ideal con nuestro buscador especializado por ubicación, precio y características.">
+    <meta property="og:image" content="https://specialhome.com.mx/static/logo%20sh_Mesa%20de%20trabajo%201.png">
+
+    <!-- Google Tag Manager (GTM) -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-5PF7ZFNP');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #F9F7F4;
+            --bg-card: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --color-primary: #C5A059;
+            --color-primary-dark: #A38448;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 4px 20px rgba(0,0,0,0.03);
+            --max-width: 1200px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box !important; margin: 0; padding: 0; }
+        html { width: 100%; overflow-x: hidden !important; scroll-behavior: smooth; }
+        body { display: block !important; width: 100% !important; background-color: var(--bg-body); color: var(--text-main); font-family: "Lato", sans-serif; -webkit-font-smoothing: antialiased; }
+        
+        /* BLOQUEO TOTAL DE CLIC SECUNDARIO Y ARRASTRE DE IMÁGENES */
+        img { 
+            max-width: 100%; height: auto; display: block; 
+            pointer-events: none; -webkit-user-drag: none; user-select: none; 
+        }
+
+        .container { width: 100%; max-width: var(--max-width); margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+
+        /* HEADER */
+        .site-header { position: sticky; top: 0; left: 0; width: 100%; z-index: 100; padding: 15px 0; background-color: #1A1A1A; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+        .header-container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .nav-brand { display: flex; flex-direction: column; align-items: center; width: 65px; flex-shrink: 0; text-decoration: none; }
+        .brand-logo-img { width: 42px; height: auto; object-fit: contain; display: block; }
+        .brand-text { font-weight: 900; font-size: 7px; text-transform: uppercase; letter-spacing: 0.8px; color: #FFFFFF; margin-top: 4px; text-align: center; white-space: nowrap; }
+
+        .desktop-nav { display: flex; align-items: center; gap: 20px; }
+        .nav-links { display: flex; gap: 16px; list-style: none; align-items: center; }
+        .nav-links a { color: #FFFFFF; text-decoration: none; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; transition: color 0.2s; white-space: nowrap; }
+        .nav-links a:hover { color: var(--color-primary); }
+
+        .btn-nav-action { background-color: transparent; border: 2px solid #FFFFFF; padding: 7px 16px; border-radius: 6px; color: #FFFFFF; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; cursor: pointer; transition: all 0.3s; white-space: nowrap; }
+        .btn-nav-action:hover { background-color: #FFFFFF; color: var(--text-main); }
+
+        .mobile-hamburger { display: none; background: none; border: none; color: #FFFFFF; font-size: 1.8rem; cursor: pointer; padding: 5px; }
+
+        /* DRAWER MÓVIL */
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-color: rgba(0,0,0,0.7); z-index: 199; display: none; }
+        .drawer-overlay.active { display: block; }
+        .mobile-drawer { position: fixed; top: 0; right: 0; width: 85%; max-width: 280px; height: 100vh; background-color: rgba(20, 20, 20, 0.98); backdrop-filter: blur(15px); z-index: 200; display: none; flex-direction: column; padding: 25px; box-shadow: -5px 0 25px rgba(0,0,0,0.5); }
+        .mobile-drawer.active { display: flex; }
+        .drawer-close { align-self: flex-end; background: none; border: none; color: #FFFFFF; font-size: 1.8rem; cursor: pointer; margin-bottom: 25px; }
+        .mobile-drawer-links { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+        .mobile-drawer-links a { color: #FFFFFF; text-decoration: none; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
+        .mobile-drawer-btn { margin-top: 25px; background-color: var(--color-primary); color: #FFFFFF; border: none; padding: 12px; border-radius: 6px; font-weight: 900; text-transform: uppercase; cursor: pointer; width: 100%; }
+
+        /* BREADCRUMB */
+        .breadcrumb { padding: 15px 0; background-color: #FFFFFF; font-size: 0.8rem; color: var(--text-muted); border-bottom: 1px solid var(--border-color); }
+        .breadcrumb a { color: var(--text-main); text-decoration: none; font-weight: 700; }
+
+        /* LAYOUT BUSCADOR AVANZADO */
+        .search-page-layout { display: grid; grid-template-columns: 300px 1fr; gap: 30px; padding: 35px 0 70px; }
+
+        /* FILTROS LATERALES */
+        .filters-sidebar { background: var(--bg-card); border-radius: 14px; padding: 25px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); height: fit-content; position: sticky; top: 95px; }
+        .filter-title { font-size: 1.1rem; font-weight: 900; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .filter-reset { font-size: 0.75rem; color: var(--color-primary); cursor: pointer; text-decoration: underline; font-weight: 700; }
+
+        .filter-group { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
+        .filter-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+        .filter-group input[type="text"], .filter-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; outline: none; background: #FFF; }
+        .filter-group input:focus, .filter-group select:focus { border-color: var(--color-primary); }
+
+        /* ESTILO PARA EL SELECTOR DE PRECIO EN BARRA (SLIDER) */
+        .range-slider-container { display: flex; flex-direction: column; gap: 6px; }
+        .range-slider-container input[type="range"] { width: 100%; accent-color: var(--color-primary); cursor: pointer; }
+        .range-value-display { font-size: 0.85rem; font-weight: 900; color: var(--color-primary-dark); text-align: right; }
+
+        .btn-apply-filters { width: 100%; background: var(--color-primary); color: #FFFFFF; border: none; padding: 12px; border-radius: 8px; font-weight: 900; text-transform: uppercase; font-size: 0.85rem; cursor: pointer; margin-top: 10px; transition: opacity 0.2s; }
+        .btn-apply-filters:hover { opacity: 0.9; }
+
+        /* RESULTADOS PRINCIPALES */
+        .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; background: var(--bg-card); padding: 15px 25px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .results-count { font-weight: 900; font-size: 0.95rem; }
+
+        .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+        .property-result-card { background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); transition: transform 0.2s; cursor: pointer; display: flex; flex-direction: column; }
+        .property-result-card:hover { transform: translateY(-3px); }
+        
+        .result-card-media { height: 200px; width: 100%; position: relative; background: #EEE; overflow: hidden; }
+        .result-card-media img { width: 100%; height: 100%; object-fit: cover; }
+        .result-badge-op { position: absolute; top: 12px; left: 12px; background: #1A1A1A; color: #FFF; padding: 4px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: 900; text-transform: uppercase; }
+
+        .result-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 12px; }
+        .result-meta { font-size: 0.68rem; font-weight: 900; color: var(--color-primary); text-transform: uppercase; }
+        .result-title { font-size: 1.05rem; font-weight: 900; color: var(--text-main); line-height: 1.3; }
+        .result-location { font-size: 0.8rem; color: var(--text-muted); }
+        
+        .result-metrics { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #F1F5F9; padding-top: 12px; margin-top: auto; }
+        .result-price { font-size: 1.15rem; font-weight: 900; color: var(--text-main); }
+        .result-specs { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); }
+
+        .empty-results { grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color); }
+
+        /* FOOTER */
+        .site-footer { background-color: #1A1A1A; color: #FFFFFF; padding: 60px 0 30px; border-top: 4px solid var(--color-primary); width: 100%; }
+        .footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 30px; border-bottom: 1px solid #2D2D2D; padding-bottom: 40px; max-width: var(--max-width); margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+        .footer-brand-col { display: flex; flex-direction: column; gap: 12px; }
+        .footer-brand-col p { font-size: 0.8rem; color: #888; line-height: 1.5; }
+        .footer-links-col h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 20px; font-weight: 900; }
+        .footer-links-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links-col ul a { color: #AAA; text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: color 0.2s; }
+        .footer-links-col ul a:hover { color: #FFFFFF; }
+        .footer-bottom { max-width: var(--max-width); margin: 0 auto; padding: 30px 20px 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #666; }
+        .footer-bottom-links { display: flex; gap: 15px; }
+        .footer-bottom-links a { color: #666; text-decoration: none; font-weight: 700; }
+
+        @media (max-width: 900px) {
+            .desktop-nav { display: none !important; }
+            .mobile-hamburger { display: block !important; }
+            .search-page-layout { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr; }
+            .filters-sidebar { position: relative; top: 0; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 20px; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PF7ZFNP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <aside class="mobile-drawer" id="mobile-drawer">
+        <button class="drawer-close" id="drawer-close-btn" aria-label="Cerrar Menú">✕</button>
+        <ul class="mobile-drawer-links">
+            <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+            <li><a href="/buscador?tab=preventa">Preventa</a></li>
+            <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+            <li><a href="/buscador?tab=comercial">Comercial</a></li>
+            <li><a href="/soluciones-b2b">Soluciones B2B y Proyectos</a></li>
+        </ul>
+        <button class="mobile-drawer-btn" onclick="window.location.href='/portal'">Portal del Asesor</button>
+    </aside>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="/" class="nav-brand" aria-label="Inicio Special Home">
+                <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home Logo" class="brand-logo-img">
+                <div class="brand-text">Special Home</div>
+            </a>
+
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+                    <li><a href="/buscador?tab=preventa">Preventa</a></li>
+                    <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+                    <li><a href="/buscador?tab=comercial">Comercial</a></li>
+                    <li><a href="/soluciones-b2b">Soluciones B2B y Proyectos</a></li>
+                </ul>
+                <button class="btn-nav-action" onclick="window.location.href='/portal'">Portal del Asesor</button>
+            </nav>
+
+            <button class="mobile-hamburger" id="hamburger-btn" aria-label="Abrir Menú">☰</button>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <div class="container">Inicio / <strong>Buscador Avanzado</strong></div>
+    </div>
+
+    <!-- CONTENEDOR DE BÚSQUEDA -->
+    <div class="container">
+        <div class="search-page-layout">
+            
+            <!-- SIDEBAR DE FILTROS AVANZADOS -->
+            <aside class="filters-sidebar">
+                <div class="filter-title">
+                    <span>Filtros de Búsqueda</span>
+                    <span class="filter-reset" onclick="reiniciarFiltros()">Limpiar</span>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-q">Palabra Clave / Ubicación</label>
+                    <input type="text" id="filtro-q" placeholder="Ej. Lomas, Polanco, Naucalpan..." oninput="aplicarFiltrosAvanzados()">
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-categoria">Categoría Principal</label>
+                    <select id="filtro-categoria" onchange="actualizarTiposFiltro(); aplicarFiltrosAvanzados();">
+                        <option value="">Todas las categorías</option>
+                        <option value="Propiedades">Propiedades</option>
+                        <option value="Preventa">Preventa</option>
+                        <option value="Naves Ind.">Naves Ind.</option>
+                        <option value="Comercial">Comercial</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-tipo">Tipo de Propiedad</label>
+                    <select id="filtro-tipo" onchange="aplicarFiltrosAvanzados()">
+                        <option value="">Todos los tipos</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-operacion">Modalidad de Operación</label>
+                    <select id="filtro-operacion" onchange="aplicarFiltrosAvanzados()">
+                        <option value="">Todas</option>
+                        <option value="Venta">Venta</option>
+                        <option value="Renta">Renta</option>
+                        <option value="Venta / Renta">Venta / Renta</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-estado">Estado</label>
+                    <select id="filtro-estado" onchange="actualizarMunicipiosFiltro(); aplicarFiltrosAvanzados();">
+                        <option value="">Todos los estados</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-municipio">Municipio / Alcaldía</label>
+                    <select id="filtro-municipio" onchange="aplicarFiltrosAvanzados()" disabled>
+                        <option value="">Selecciona Estado primero</option>
+                    </select>
+                </div>
+
+                <!-- FILTRO DE PRECIO EN BARRA / SLIDER -->
+                <div class="filter-group">
+                    <label for="filtro-precio-max">Precio Máximo (MXN)</label>
+                    <div class="range-slider-container">
+                        <input type="range" id="filtro-precio-max" min="0" max="100000000" step="500000" value="100000000" oninput="actualizarDisplayPrecio(this.value); aplicarFiltrosAvanzados();">
+                        <div class="range-value-display" id="precio-display">$ 100,000,000 MXN (Sin límite)</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtro-recamaras">Recámaras</label>
+                    <select id="filtro-recamaras" onchange="aplicarFiltrosAvanzados()">
+                        <option value="">Indiferente</option>
+                        <option value="1">1 o más</option>
+                        <option value="2">2 o más</option>
+                        <option value="3">3 o más</option>
+                        <option value="4">4 o más</option>
+                    </select>
+                </div>
+
+                <button class="btn-apply-filters" onclick="aplicarFiltrosAvanzados()">Filtrar Resultados</button>
+            </aside>
+
+            <!-- GRILLA DE RESULTADOS -->
+            <section class="search-results-section">
+                <div class="results-header">
+                    <div class="results-count">Se encontraron <span id="total-resultados">0</span> propiedades</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Curaduría Verificada Special Home</div>
+                </div>
+
+                <div class="results-grid" id="grid-resultados">
+                    <div class="empty-results">⏳ Cargando catálogo de propiedades...</div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <a href="/" class="nav-brand" style="margin-bottom: 5px;">
+                        <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home" class="brand-logo-img" style="width: 42px;">
+                    </a>
+                    <h4 style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: #FFF; font-weight: 900; margin-top: 5px;">Special Home</h4>
+                    <p>La plataforma tecnológica de corretaje y curaduría para el mercado residencial de lujo, naves industriales, activos comerciales y soluciones jurídicas en México.</p>
+                </div>
+                
+                <div class="footer-links-col">
+                    <h4>Menú Principal</h4>
+                    <ul>
+                        <li><a href="/buscador?tab=propiedades">Propiedades</a></li>
+                        <li><a href="/buscador?tab=preventa">Preventa</a></li>
+                        <li><a href="/buscador?tab=naves">Naves industriales</a></li>
+                        <li><a href="/buscador?tab=comercial">Comercial</a></li>
+                        <li><a href="/soluciones-b2b">Soluciones Jurídicas</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Regiones Premium</h4>
+                    <ul>
+                        <li><a href="#">San Pedro Garza García</a></li>
+                        <li><a href="#">Lomas de Chapultepec</a></li>
+                        <li><a href="#">Puerta de Hierro</a></li>
+                        <li><a href="#">Punta Mita Exclusive</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Corporativo</h4>
+                    <ul>
+                        <li><a href="#">Quiénes Somos</a></li>
+                        <li><a href="#">Unirse como Asesor</a></li>
+                        <li><a href="#">Market Insights</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 specialhome.com.mx. Todos los derechos reservados.</div>
+                <div class="footer-bottom-links">
+                    <a href="/aviso-privacidad">Aviso de Privacidad</a>
+                    <a href="/terminos-condiciones">Términos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const drawerCloseBtn = document.getElementById('drawer-close-btn');
+            const mobileDrawer = document.getElementById('mobile-drawer');
+            const drawerOverlay = document.getElementById('drawer-overlay');
+
+            function openDrawer() { mobileDrawer.classList.add('active'); drawerOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+            function closeDrawer() { mobileDrawer.classList.remove('active'); drawerOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+
+            if(hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+            if(drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+            if(drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('contextmenu', e => e.preventDefault());
+            });
+
+            inicializarFiltrosGeograficos();
+            cargarTodasLasOpcionesDeTipos();
+            leerParametrosURLYBuscar();
+        });
+
+        const datosGeograficosMexico = {
+            "Ciudad de México": ["Álvaro Obregón", "Azcapotzalco", "Benito Juárez", "Coyoacán", "Cuajimalpa de Morelos", "Cuauhtémoc", "Gustavo A. Madero", "Iztacalco", "Iztapalapa", "Magdalena Contreras", "Miguel Hidalgo", "Milpa Alta", "Tláhuac", "Tlalpan", "Venustiano Carranza", "Xochimilco"],
+            "Estado de México": ["Naucalpan de Juárez", "Huixquilucan", "Atizapán de Zaragoza", "Tlalnepantla de Baz", "Toluca", "Metepec", "Cuautitlán Izcalli", "Ecatepec de Morelos", "Nezahualcóyotl", "Texcoco", "Valle de Bravo"],
+            "Jalisco": ["Guadalajara", "Zapopan", "San Pedro Tlaquepaque", "Puerto Vallarta"],
+            "Nuevo León": ["San Pedro Garza García", "Monterrey", "Santa Catarina", "Apodaca"],
+            "Guanajuato": ["Leon", "San Miguel de Allende", "Guanajuato"],
+            "Puebla": ["Puebla", "San Andrés Cholula"],
+            "Querétaro": ["Querétaro", "El Marqués", "Corregidora"],
+            "Quintana Roo": ["Benito Juárez (Cancún)", "Solidaridad (Playa del Carmen)", "Tulum"]
+        };
+
+        const opcionesTiposFiltro = {
+            "Propiedades": ["Mansiones", "Golf Estates", "Country Club", "Casa de Lujo", "Departamento de Lujo"],
+            "Preventa": ["Desarrollos inmobiliarios", "Condominios", "Pent-houses", "Garden Houses", "Lofts"],
+            "Naves Ind.": ["Warehouse", "CEDIS", "Naves para Manufactura", "Cross-docking"],
+            "Comercial": ["Street Retail", "Plazas y Centros Comerciales", "Oficinas", "Kioscos y Stands"]
+        };
+
+        function inicializarFiltrosGeograficos() {
+            const selectEstado = document.getElementById("filtro-estado");
+            selectEstado.innerHTML = '<option value="">Todos los estados</option>';
+            Object.keys(datosGeograficosMexico).forEach(edo => {
+                selectEstado.innerHTML += `<option value="${edo}">${edo}</option>`;
+            });
+        }
+
+        function actualizarMunicipiosFiltro() {
+            const estadoSel = document.getElementById("filtro-estado").value;
+            const selectMun = document.getElementById("filtro-municipio");
+
+            if (!estadoSel || !datosGeograficosMexico[estadoSel]) {
+                selectMun.innerHTML = '<option value="">Selecciona Estado primero</option>';
+                selectMun.disabled = true;
+                aplicarFiltrosAvanzados();
+                return;
+            }
+
+            selectMun.disabled = false;
+            selectMun.innerHTML = '<option value="">Todos los municipios</option>';
+            datosGeograficosMexico[estadoSel].forEach(mun => {
+                selectMun.innerHTML += `<option value="${mun}">${mun}</option>`;
+            });
+            aplicarFiltrosAvanzados();
+        }
+
+        function cargarTodasLasOpcionesDeTipos() {
+            const selectTipo = document.getElementById("filtro-tipo");
+            let html = '<option value="">Todos los tipos</option>';
+            Object.keys(opcionesTiposFiltro).forEach(cat => {
+                opcionesTiposFiltro[cat].forEach(t => {
+                    html += `<option value="${t}">${t}</option>`;
+                });
+            });
+            selectTipo.innerHTML = html;
+        }
+
+        function actualizarTiposFiltro() {
+            const cat = document.getElementById("filtro-categoria").value;
+            const selectTipo = document.getElementById("filtro-tipo");
+            if (!cat || !opcionesTiposFiltro[cat]) {
+                cargarTodasLasOpcionesDeTipos();
+                return;
+            }
+            selectTipo.innerHTML = '<option value="">Todos los tipos</option>' + (opcionesTiposFiltro[cat] || []).map(t => `<option value="${t}">${t}</option>`).join('');
+        }
+
+        function actualizarDisplayPrecio(val) {
+            const num = Number(val);
+            const display = document.getElementById("precio-display");
+            if (num >= 100000000) {
+                display.innerText = "Sin límite máximo";
+            } else {
+                display.innerText = "$ " + num.toLocaleString('en-US') + " MXN";
+            }
+        }
+
+        function leerParametrosURLYBuscar() {
+            const params = new URLSearchParams(window.location.search);
+            const tabUrl = params.get("tab");
+            const qUrl = params.get("q");
+            const tipoUrl = params.get("tipo");
+
+            if (tabUrl) {
+                const mapaTabs = { propiedades: "Propiedades", preventa: "Preventa", naves: "Naves Ind.", comercial: "Comercial" };
+                if (mapaTabs[tabUrl]) {
+                    document.getElementById("filtro-categoria").value = mapaTabs[tabUrl];
+                    actualizarTiposFiltro();
+                }
+            }
+            if (qUrl) {
+                document.getElementById("filtro-q").value = qUrl;
+            }
+            if (tipoUrl) {
+                document.getElementById("filtro-tipo").value = tipoUrl;
+            }
+
+            aplicarFiltrosAvanzados();
+        }
+
+        async function aplicarFiltrosAvanzados() {
+            const q = document.getElementById("filtro-q").value.trim().toLowerCase();
+            const cat = document.getElementById("filtro-categoria").value;
+            const tipo = document.getElementById("filtro-tipo").value;
+            const operacion = document.getElementById("filtro-operacion").value;
+            const estado = document.getElementById("filtro-estado").value;
+            const municipio = document.getElementById("filtro-municipio").value;
+            const precioMax = parseFloat(document.getElementById("filtro-precio-max").value) || 100000000;
+            const recamarasMin = parseInt(document.getElementById("filtro-recamaras").value) || 0;
+
+            const gridContainer = document.getElementById("grid-resultados");
+            const counterContainer = document.getElementById("total-resultados");
+
+            try {
+                const res = await fetch("/api/propiedades");
+                const data = await res.json();
+                let lista = data.propiedades || [];
+
+                lista = lista.filter(p => {
+                    if (q) {
+                        const textoBusqueda = `${p.titulo || ''} ${p.colonia || ''} ${p.municipio || ''} ${p.estado || ''} ${p.descripcion || ''}`.toLowerCase();
+                        if (!textoBusqueda.includes(q)) return false;
+                    }
+                    if (cat && (p.categoria_tab || '').toLowerCase() !== cat.toLowerCase()) return false;
+                    if (tipo && (p.tipo_propiedad || '').toLowerCase() !== tipo.toLowerCase()) return false;
+                    
+                    if (operacion) {
+                        const opProp = (p.tipo_operacion || '').toLowerCase();
+                        const opFiltro = operacion.toLowerCase();
+                        if (!opProp.includes(opFiltro)) return false;
+                    }
+
+                    if (estado && (p.estado || '').toLowerCase() !== estado.toLowerCase()) return false;
+                    if (municipio && (p.municipio || '').toLowerCase() !== municipio.toLowerCase()) return false;
+
+                    const precioVal = Number(p.precio_lista) || 0;
+                    if (precioMax < 100000000 && precioVal > precioMax) return false;
+
+                    if (recamarasMin > 0) {
+                        const recamarasVal = Number(p.recamaras) || 0;
+                        if (recamarasVal < recamarasMin) return false;
+                    }
+
+                    return true;
+                });
+
+                counterContainer.innerText = lista.length;
+
+                if (lista.length === 0) {
+                    gridContainer.innerHTML = `
+                        <div class="empty-results">
+                            <h3 style="font-size: 1.1rem; font-weight: 900; color: var(--text-main);">🏡 No se encontraron inmuebles con los filtros seleccionados</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">Intenta ampliar los rangos o limpiar algunos criterios de búsqueda.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                gridContainer.innerHTML = lista.map(p => {
+                    const foto = p.imagen_principal || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=500&auto=format&fit=crop";
+                    const precioFmt = "$ " + Number(p.precio_lista).toLocaleString('en-US') + " MXN";
+                    const recVal = Number(p.recamaras) || 0;
+                    const specs = `${recVal > 0 ? recVal + ' Rec. · ' : ''}${p.terreno_m2} m² Terr. · ${p.construccion_m2} m² Const.`;
+                    const ubicacion = `📍 ${p.colonia || ''}, ${p.municipio || ''}, ${p.estado || ''}`;
+
+                    return `
+                        <div class="property-result-card" onclick="window.location.href='/propiedad/${p.slug}'">
+                            <div class="result-card-media">
+                                <span class="result-badge-op">${p.tipo_operacion}</span>
+                                <img src="${foto}" alt="${p.titulo}" loading="lazy">
+                            </div>
+                            <div class="result-card-body">
+                                <div>
+                                    <div class="result-meta">${p.tipo_propiedad} (${p.categoria_tab})</div>
+                                    <h3 class="result-title">${p.titulo}</h3>
+                                    <div class="result-location">${ubicacion}</div>
+                                </div>
+                                <div class="result-metrics">
+                                    <div class="result-price">${precioFmt}</div>
+                                    <div class="result-specs">${specs}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error("Error al filtrar propiedades:", err);
+                gridContainer.innerHTML = `<div class="empty-results" style="color: #E74C3C;">❌ Error al conectar con el servidor.</div>`;
+            }
+        }
+
+        function reiniciarFiltros() {
+            document.getElementById("filtro-q").value = "";
+            document.getElementById("filtro-categoria").value = "";
+            cargarTodasLasOpcionesDeTipos();
+            document.getElementById("filtro-operacion").value = "";
+            document.getElementById("filtro-estado").value = "";
+            document.getElementById("filtro-municipio").innerHTML = '<option value="">Selecciona Estado primero</option>';
+            document.getElementById("filtro-municipio").disabled = true;
+            
+            const slider = document.getElementById("filtro-precio-max");
+            slider.value = 100000000;
+            actualizarDisplayPrecio(100000000);
+
+            document.getElementById("filtro-recamaras").value = "";
+            aplicarFiltrosAvanzados();
+        }
+    </script>
+</body>
+</html>

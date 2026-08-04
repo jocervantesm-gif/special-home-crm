@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alta de Propiedad - Special Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Librería ultraligera para Drag & Drop nativo de imágenes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <style>
+        :root {
+            --bg-body: #F9F7F4;
+            --bg-card: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-muted: #666666;
+            --color-primary: #C5A059;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 4px 20px rgba(0,0,0,0.03);
+
+            --seo-red: #E74C3C;
+            --seo-orange: #E67E22;
+            --seo-green: #27AE60;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Lato", sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; font-size: 15px; }
+
+        /* BARRA LATERAL UNIFICADA */
+        .sidebar {
+            width: 110px;
+            background-color: #1A1A1A;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 0;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            z-index: 10;
+        }
+
+        .sidebar-brand {
+            width: 65px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .brand-logo-img { width: 38px; height: auto; object-fit: contain; display: block; }
+        
+        .brand-text {
+            font-weight: 700;
+            font-size: 7.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #FFFFFF;
+            margin-top: 4px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ÍCONOS FLAT MINIMALISTAS CON TEXTO DEBAJO */
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 16px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-icon-box {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #AAA;
+            border-radius: 10px;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item.active .nav-icon-box, .nav-item:hover .nav-icon-box {
+            background-color: #2D2D2D;
+            color: var(--color-primary);
+        }
+
+        .nav-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #888888;
+            text-align: center;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active .nav-label, .nav-item:hover .nav-label {
+            color: var(--color-primary);
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .main-content { margin-left: 110px; flex: 1; padding: 35px 40px; max-width: 960px; width: calc(100% - 110px); }
+        
+        .form-card { background: var(--bg-card); border-radius: 16px; padding: 35px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        
+        .page-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 4px; }
+        .page-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 25px; }
+
+        /* NAVEGACIÓN POR PASOS (WIZARD CLEAN) */
+        .steps-header { display: flex; border-bottom: 2px solid #F1F5F9; margin-bottom: 30px; gap: 10px; }
+        .step-tab { flex: 1; padding: 12px 10px; text-align: center; font-size: 0.8rem; font-weight: 700; color: #94A3B8; border-bottom: 3px solid transparent; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s; }
+        .step-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 900; }
+
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+
+        /* CAMPOS & GRID */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea { padding: 11px 14px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; outline: none; background: #FFF; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-primary); }
+        .form-group input[readonly] { background-color: #F8FAFC; color: #64748B; cursor: not-allowed; }
+
+        /* ÁREA DRAG & DROP DE FOTOS */
+        .drag-drop-zone { border: 2px dashed var(--color-primary); border-radius: 12px; padding: 25px 20px; text-align: center; background-color: #FAF8F5; cursor: pointer; transition: background 0.2s; margin-bottom: 20px; }
+        .drag-drop-zone:hover { background-color: #F3ECE1; }
+        .drag-drop-icon { font-size: 2.2rem; display: block; margin-bottom: 6px; }
+        .drag-drop-text { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
+        .drag-drop-subtext { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* GALERÍA REORDENABLE POR DRAG & DROP */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 15px; }
+        .image-card { background: #FFF; border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; position: relative; cursor: grab; box-shadow: var(--shadow-sm); user-select: none; }
+        .image-card:active { cursor: grabbing; opacity: 0.8; }
+        .image-card-img { width: 100%; height: 105px; object-fit: cover; }
+        
+        .image-badge { position: absolute; top: 6px; left: 6px; padding: 3px 6px; border-radius: 4px; font-size: 0.6rem; font-weight: 900; text-transform: uppercase; color: #FFF; }
+        .badge-principal { background-color: var(--color-primary); color: #1A1A1A; }
+        .badge-destacada { background-color: #1A1A1A; }
+        .badge-galeria { background-color: #64748B; }
+
+        .btn-img-delete { position: absolute; top: 6px; right: 6px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 24px; height: 24px; color: var(--seo-red); font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .btn-img-delete:hover { background: var(--seo-red); color: #FFF; }
+
+        /* AMENIDADES CLEAN */
+        .amenities-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+        .amenity-checkbox { display: flex; align-items: center; gap: 8px; background-color: #F8FAFC; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border-color); cursor: pointer; font-size: 0.82rem; font-weight: 700; color: var(--text-main); }
+        .amenity-checkbox input[type="checkbox"] { accent-color: var(--color-primary); width: 16px; height: 16px; }
+
+        /* SEO WIDGET CLEAN */
+        .seo-container { background-color: #F8FAFC; border: 1px solid var(--border-color); border-radius: 12px; padding: 18px; margin-top: 15px; }
+        .seo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .seo-score-badge { font-size: 0.78rem; font-weight: 900; padding: 4px 10px; border-radius: 20px; color: #FFF; background-color: var(--seo-red); }
+        .seo-progress-bar-bg { width: 100%; height: 8px; background-color: #E2E8F0; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+        .seo-progress-bar-fill { height: 100%; width: 0%; background-color: var(--seo-red); transition: width 0.3s; }
+        .seo-tips-list { list-style: none; font-size: 0.78rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px; }
+        .seo-tip-item.ok { color: var(--seo-green); font-weight: 700; }
+
+        /* BOTONES DE NAVEGACIÓN DE PASOS */
+        .wizard-buttons { display: flex; justify-content: space-between; margin-top: 30px; gap: 15px; }
+        .btn-wizard { padding: 12px 24px; border-radius: 8px; font-weight: 900; font-size: 0.85rem; text-transform: uppercase; cursor: pointer; border: none; }
+        .btn-prev { background: #ECEFF1; color: var(--text-main); }
+        .btn-next { background: var(--text-main); color: #FFF; }
+        .btn-submit { background: var(--color-primary); color: #1A1A1A; }
+
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid var(--border-color); flex-direction: row; justify-content: space-between; padding: 12px 20px; }
+            .sidebar-brand { margin-bottom: 0; width: 60px; }
+            .main-content { margin-left: 0; width: 100%; padding: 15px; }
+            .form-card { padding: 20px 15px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+            .steps-header { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA LATERAL UNIFICADA -->
+    <nav class="sidebar">
+        <a href="/" class="sidebar-brand">
+            <img src="/static/logo sh_Mesa de trabajo 1.png" alt="Special Home" class="brand-logo-img">
+            <div class="brand-text">Special Home</div>
+        </a>
+
+        <a href="/portal" class="nav-item">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="nav-label">Portal</span>
+        </a>
+
+        <a href="/kanban" class="nav-item">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <span class="nav-label">Kanban</span>
+        </a>
+
+        <a href="/alta-propiedad" class="nav-item active">
+            <div class="nav-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <span class="nav-label">Propiedad</span>
+        </a>
+    </nav>
+
+    <main class="main-content">
+        <div class="form-card">
+            <h1 class="page-title">Alta de Nueva Propiedad</h1>
+            <p class="page-subtitle">Paso a paso para el registro oficial en specialhome.com.mx</p>
+
+            <!-- PESTAÑAS WIZARD -->
+            <div class="steps-header">
+                <div class="step-tab active" onclick="irAlPaso(1)">1. Ubicación</div>
+                <div class="step-tab" onclick="irAlPaso(2)">2. Ficha y Costos</div>
+                <div class="step-tab" onclick="irAlPaso(3)">3. Fotos y Amenidades</div>
+                <div class="step-tab" onclick="irAlPaso(4)">4. SEO y Registro</div>
+            </div>
+
+            <form id="formPropiedad">
+                
+                <!-- PASO 1: CLASIFICACIÓN Y UBICACIÓN -->
+                <div class="step-content active" id="step-1">
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Categoría Principal</label>
+                            <select id="categoria_tab" onchange="actualizarTipos(); actualizarAmenidades(); evaluarSEO();">
+                                <option value="Propiedades">Propiedades</option>
+                                <option value="Preventa">Preventa</option>
+                                <option value="Naves Ind.">Naves Ind.</option>
+                                <option value="Comercial">Comercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo Especializado</label>
+                            <select id="tipo_propiedad" onchange="evaluarSEO()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Operación</label>
+                            <select id="tipo_operacion" onchange="evaluarSEO()">
+                                <option value="Venta / Renta">Venta / Renta</option>
+                                <option value="Venta">Venta</option>
+                                <option value="Renta">Renta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Título Comercial *</label>
+                            <input type="text" id="titulo" placeholder="ej. Residencia Minimalista con Alberca" oninput="generarSlug(); evaluarSEO();" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Slug URL 🔒</label>
+                            <input type="text" id="slug" placeholder="se-generara-automaticamente" readonly required>
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Estado *</label>
+                            <select id="estado" onchange="actualizarMunicipios(); evaluarSEO();" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Municipio / Alcaldía *</label>
+                            <select id="municipio" onchange="evaluarSEO()" required disabled></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Colonia *</label>
+                            <input type="text" id="colonia" placeholder="ej. Lomas de Tecamachalco" oninput="evaluarSEO()" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Calle y Número *</label>
+                            <input type="text" id="calle_numero" placeholder="Fuente de Tivoli 30" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Código Postal *</label>
+                            <input type="text" id="cp" placeholder="53950" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Google Maps Iframe</label>
+                            <input type="text" id="google_maps_iframe" placeholder='<iframe src="..."></iframe>'>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 2: DIMENSIONES Y VALORES -->
+                <div class="step-content" id="step-2">
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Precio Lista (MXN) *</label>
+                            <input type="text" id="precio_lista" placeholder="$ 21,110,000" oninput="formatearMoneda(this)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Oferta Mínima Aceptable</label>
+                            <input type="text" id="precio_minimo_oferta" placeholder="$ 19,500,000" oninput="formatearMoneda(this)">
+                        </div>
+                        <div class="form-group">
+                            <label>Precio Renta Mensual</label>
+                            <input type="text" id="precio_renta" placeholder="$ 105,500" oninput="formatearMoneda(this)">
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Terreno (m²) *</label>
+                            <input type="number" id="terreno_m2" placeholder="350" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Construcción (m²) *</label>
+                            <input type="number" id="construccion_m2" placeholder="790" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Recámaras / Espacios</label>
+                            <input type="number" id="recamaras" placeholder="3">
+                        </div>
+                    </div>
+
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label>Baños Completos</label>
+                            <input type="number" id="banos_completos" placeholder="3">
+                        </div>
+                        <div class="form-group">
+                            <label>Medios Baños</label>
+                            <input type="number" id="medios_banos" placeholder="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Estacionamientos</label>
+                            <input type="number" id="estacionamientos" placeholder="2">
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Asesor Opcionador (Creador) 🔒</label>
+                            <input type="text" id="asesor_opcionador" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Valuador Certificado</label>
+                            <select id="valuador">
+                                <option value="Ing. Kitlanezi León Soto">Ing. Kitlanezi León Soto (Valuador Senior)</option>
+                                <option value="Arq. Roberto Almanza Cruz">Arq. Roberto Almanza Cruz (Perito Comercial)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 3: GALERÍA REORDENABLE DRAG & DROP Y AMENIDADES -->
+                <div class="step-content" id="step-3">
+                    <input type="file" id="fileInput" multiple accept="image/*" style="display: none;" onchange="procesarArchivos(this.files)">
+                    
+                    <div class="drag-drop-zone" onclick="document.getElementById('fileInput').click()">
+                        <span class="drag-drop-icon">📸</span>
+                        <div class="drag-drop-text">Haz clic o arrastra fotos aquí para subirlas</div>
+                        <div class="drag-drop-subtext">💡 TIP: Arrastra las imágenes libremente para reordenarlas a tu gusto. La 1ª será la Portada Principal.</div>
+                    </div>
+
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">
+                        Fotografías Subidas (<span id="countFotos">0</span> / 30)
+                    </div>
+
+                    <!-- CONTENEDOR REORDENABLE POR SORTABLE.JS -->
+                    <div class="gallery-grid" id="galleryContainer"></div>
+
+                    <div style="margin-top: 25px;">
+                        <label style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);" id="titulo-amenidades">Amenidades Especializadas</label>
+                        <div class="amenities-container" id="contenedorAmenidades"></div>
+                    </div>
+                </div>
+
+                <!-- PASO 4: DESCRIPCIÓN Y SEO -->
+                <div class="step-content" id="step-4">
+                    <div class="form-group">
+                        <label>Redacción de la Descripción Comercial</label>
+                        <textarea id="descripcion" rows="6" placeholder="Escribe aquí los detalles destacados del inmueble..." oninput="evaluarSEO()"></textarea>
+                    </div>
+
+                    <div class="seo-container">
+                        <div class="seo-header">
+                            <span style="font-size: 0.8rem; font-weight: 900; text-transform: uppercase;">🔍 Calificación SEO Google</span>
+                            <span class="seo-score-badge" id="seoBadge">0% - Insuficiente</span>
+                        </div>
+                        <div class="seo-progress-bar-bg">
+                            <div class="seo-progress-bar-fill" id="seoBar"></div>
+                        </div>
+                        <ul class="seo-tips-list">
+                            <li class="seo-tip-item" id="tip-length">⚪ Mínimo 300 caracteres de contenido explicativo.</li>
+                            <li class="seo-tip-item" id="tip-tipo">⚪ Incluir tipo de propiedad (<span id="kw-tipo">-</span>).</li>
+                            <li class="seo-tip-item" id="tip-ubicacion">⚪ Incluir ubicación clave (<span id="kw-ubicacion">-</span>).</li>
+                            <li class="seo-tip-item" id="tip-operacion">⚪ Mencionar la modalidad (<span id="kw-operacion">-</span>).</li>
+                            <li class="seo-tip-item" id="tip-keywords">⚪ Incluir palabras clave comerciales (exclusivo, plusvalía, seguridad, lujo).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- NAVEGACIÓN ENTRE PASOS -->
+                <div class="wizard-buttons">
+                    <button type="button" class="btn-wizard btn-prev" id="btnPrev" onclick="cambiarPaso(-1)" style="visibility: hidden;">Anterior</button>
+                    <button type="button" class="btn-wizard btn-next" id="btnNext" onclick="cambiarPaso(1)">Siguiente ➔</button>
+                    <button type="submit" class="btn-wizard btn-submit" id="btnSubmit" style="display: none;">REGISTRAR EN CRM</button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let pasoActual = 1;
+        let listaArchivos = [];
+        let asesorSesion = null;
+
+        function verificarSesionAsesor() {
+            const sesionStr = localStorage.getItem("special_home_asesor");
+            if (!sesionStr) {
+                window.location.href = "/login";
+                return;
+            }
+            try {
+                asesorSesion = JSON.parse(sesionStr);
+                const inputOpcionador = document.getElementById("asesor_opcionador");
+                if (inputOpcionador && asesorSesion.nombre) {
+                    inputOpcionador.value = asesorSesion.nombre;
+                }
+            } catch (e) {
+                window.location.href = "/login";
+            }
+        }
+
+        function getVal(id, def = "") {
+            const el = document.getElementById(id);
+            return el ? el.value : def;
+        }
+
+        function irAlPaso(paso) {
+            pasoActual = paso;
+            document.querySelectorAll('.step-tab').forEach((tab, i) => tab.classList.toggle('active', i + 1 === paso));
+            document.querySelectorAll('.step-content').forEach((sec, i) => sec.classList.toggle('active', i + 1 === paso));
+
+            document.getElementById('btnPrev').style.visibility = paso === 1 ? 'hidden' : 'visible';
+            if (paso === 4) {
+                document.getElementById('btnNext').style.display = 'none';
+                document.getElementById('btnSubmit').style.display = 'block';
+            } else {
+                document.getElementById('btnNext').style.display = 'block';
+                document.getElementById('btnSubmit').style.display = 'none';
+            }
+        }
+
+        function cambiarPaso(dir) {
+            const nuevoPaso = pasoActual + dir;
+            if (nuevoPaso >= 1 && nuevoPaso <= 4) irAlPaso(nuevoPaso);
+        }
+
+        function procesarArchivos(files) {
+            Array.from(files).forEach(file => {
+                if (listaArchivos.length >= 30) return;
+                if (file.type.startsWith('image/')) {
+                    const previewUrl = URL.createObjectURL(file);
+                    listaArchivos.push({ id: Math.random().toString(36).substring(7), file: file, previewUrl: previewUrl });
+                }
+            });
+            renderizarGaleria();
+        }
+
+        function renderizarGaleria() {
+            const container = document.getElementById("galleryContainer");
+            document.getElementById("countFotos").innerText = listaArchivos.length;
+            container.innerHTML = "";
+
+            listaArchivos.forEach((item, index) => {
+                let badgeHTML = index === 0 ? `<span class="image-badge badge-principal">🏆 PORTADA</span>` :
+                                (index <= 4 ? `<span class="image-badge badge-destacada">⭐ DESTACADA ${index}</span>` :
+                                `<span class="image-badge badge-galeria">📷 FOTO ${index + 1}</span>`);
+
+                container.innerHTML += `
+                    <div class="image-card" data-id="${item.id}">
+                        ${badgeHTML}
+                        <button type="button" class="btn-img-delete" onclick="eliminarFoto('${item.id}')">✕</button>
+                        <img src="${item.previewUrl}" class="image-card-img" alt="Foto">
+                    </div>
+                `;
+            });
+        }
+
+        function eliminarFoto(id) {
+            listaArchivos = listaArchivos.filter(item => item.id !== id);
+            renderizarGaleria();
+        }
+
+        new Sortable(document.getElementById('galleryContainer'), {
+            animation: 150,
+            onEnd: function () {
+                const nuevoOrdenIds = Array.from(document.querySelectorAll('#galleryContainer .image-card')).map(el => el.getAttribute('data-id'));
+                listaArchivos.sort((a, b) => nuevoOrdenIds.indexOf(a.id) - nuevoOrdenIds.indexOf(b.id));
+                renderizarGaleria();
+            }
+        });
+
+        const datosGeograficosMexico = {
+            "Ciudad de México": ["Álvaro Obregón", "Azcapotzalco", "Benito Juárez", "Coyoacán", "Cuajimalpa de Morelos", "Cuauhtémoc", "Gustavo A. Madero", "Iztacalco", "Iztapalapa", "Magdalena Contreras", "Miguel Hidalgo", "Milpa Alta", "Tláhuac", "Tlalpan", "Venustiano Carranza", "Xochimilco"],
+            "Estado de México": ["Naucalpan de Juárez", "Huixquilucan", "Atizapán de Zaragoza", "Tlalnepantla de Baz", "Toluca", "Metepec", "Cuautitlán Izcalli", "Ecatepec de Morelos", "Nezahualcóyotl", "Texcoco", "Valle de Bravo"],
+            "Jalisco": ["Guadalajara", "Zapopan", "San Pedro Tlaquepaque", "Puerto Vallarta"],
+            "Nuevo León": ["San Pedro Garza García", "Monterrey", "Santa Catarina", "Apodaca"],
+            "Guanajuato": ["Leon", "San Miguel de Allende", "Guanajuato"],
+            "Puebla": ["Puebla", "San Andrés Cholula"],
+            "Querétaro": ["Querétaro", "El Marqués", "Corregidora"],
+            "Quintana Roo": ["Benito Juárez (Cancún)", "Solidaridad (Playa del Carmen)", "Tulum"]
+        };
+
+        const opcionesTipos = {
+            "Propiedades": ["Mansiones", "Golf Estates", "Country Club", "Casa de Lujo", "Departamento de Lujo"],
+            "Preventa": ["Desarrollos inmobiliarios", "Condominios", "Pent-houses", "Garden Houses", "Lofts"],
+            "Naves Ind.": ["Warehouse", "CEDIS", "Naves para Manufactura", "Cross-docking"],
+            "Comercial": ["Street Retail", "Plazas y Centros Comerciales", "Oficinas", "Kioscos y Stands"]
+        };
+
+        const amenidadesPorCategoria = {
+            "Propiedades": ["🏊‍♂️ Alberca Privada / Jacuzzi", "🍷 Cava de Vinos Templada", "🎲 Salón de Juegos / Billar", "🌿 Roof Garden / Fire Pit", "🛗 Elevador Privado Integrado", "🔒 Domótica / Smart Home", "🧖‍♂️ Sauna / Baño de Vapor", "🧹 Cuarto de Servicio con Baño", "☀️ Paneles Solares Instalados", "🛡️ Caseta de Vigilancia 24/7"],
+            "Preventa": ["💼 Business Center / Coworking VIP", "🏋️‍♂️ Gimnasio Equipado / Yoga", "🎾 Cancha de Pádel / Pickleball", "🧒 Kid's Club / Ludoteca", "🐶 Pet Park / Áreas Verdes", "🚘 Valet Parking & Concierge 24/7", "🍾 Salón de Eventos / Lounge Bar", "🏊‍♀️ Sky Pool / Infinity Pool"],
+            "Naves Ind.": ["🚚 Andenes de Carga con Rampa", "🚛 Llenado Cross-docking Directo", "⚡ Subestación Eléctrica Dedicada", "🏗️ Resistencia de Piso > 6 Tons/m²", "🚜 Patio de Maniobras para Tráileres", "🧯 Sistema Contra Incendios", "🚂 Espuela de Ferrocarril Activa", "⚖️ Báscula Camionera"],
+            "Comercial": ["🏬 Fachada Street Retail", "⚡ Planta de Luz de Emergencia 100%", "🛗 Elevadores de Alta Velocidad", "🏢 Certificación LEED", "🛂 Control de Acceso Biométrico", "📦 Área de Carga y Descarga", "🚘 Estacionamiento Subterráneo", "📜 Uso de Suelo Comercial Vigoroso"]
+        };
+
+        function inicializarEstados() {
+            const selectEstado = document.getElementById("estado");
+            selectEstado.innerHTML = '<option value="">-- Selecciona Estado --</option>';
+            Object.keys(datosGeograficosMexico).forEach(edo => {
+                selectEstado.innerHTML += `<option value="${edo}">${edo}</option>`;
+            });
+        }
+
+        function actualizarMunicipios() {
+            const estadoSel = getVal("estado");
+            const selectMun = document.getElementById("municipio");
+
+            if (!estadoSel || !datosGeograficosMexico[estadoSel]) {
+                selectMun.innerHTML = '<option value="">-- Selecciona Estado --</option>';
+                selectMun.disabled = true;
+                return;
+            }
+
+            selectMun.disabled = false;
+            selectMun.innerHTML = '<option value="">-- Selecciona Municipio --</option>';
+            datosGeograficosMexico[estadoSel].forEach(mun => {
+                selectMun.innerHTML += `<option value="${mun}">${mun}</option>`;
+            });
+        }
+
+        function actualizarTipos() {
+            const cat = getVal("categoria_tab");
+            document.getElementById("tipo_propiedad").innerHTML = (opcionesTipos[cat] || []).map(t => `<option value="${t}">${t}</option>`).join('');
+        }
+
+        function actualizarAmenidades() {
+            const cat = getVal("categoria_tab");
+            document.getElementById("titulo-amenidades").innerText = `Amenidades Especializadas para ${cat}`;
+            document.getElementById("contenedorAmenidades").innerHTML = (amenidadesPorCategoria[cat] || []).map(am => `
+                <label class="amenity-checkbox"><input type="checkbox" value="${am}"> ${am}</label>
+            `).join('');
+        }
+
+        function generarSlug() {
+            document.getElementById("slug").value = getVal("titulo")
+                .toLowerCase().trim().normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9 -]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-');
+        }
+
+        function formatearMoneda(input) {
+            let valor = input.value.replace(/[^0-9]/g, '');
+            input.value = valor ? "$ " + parseInt(valor, 10).toLocaleString('en-US') : '';
+        }
+
+        function limpiarNumero(val) {
+            return parseFloat((val || '').replace(/[^0-9.]/g, '')) || 0;
+        }
+
+        function evaluarSEO() {
+            const texto = getVal("descripcion").toLowerCase();
+            const tipoProp = getVal("tipo_propiedad").toLowerCase();
+            const colonia = getVal("colonia").toLowerCase();
+            const municipio = getVal("municipio").toLowerCase();
+            const operacion = getVal("tipo_operacion").toLowerCase();
+
+            document.getElementById("kw-tipo").innerText = tipoProp || "tipo";
+            document.getElementById("kw-ubicacion").innerText = colonia || municipio || "colonia";
+            document.getElementById("kw-operacion").innerText = operacion || "operación";
+
+            let puntos = 0;
+            if (texto.length >= 300) { puntos += 20; document.getElementById("tip-length").className = "seo-tip-item ok"; }
+            else { document.getElementById("tip-length").className = "seo-tip-item"; }
+
+            if (tipoProp && texto.includes(tipoProp)) { puntos += 20; document.getElementById("tip-tipo").className = "seo-tip-item ok"; }
+            else { document.getElementById("tip-tipo").className = "seo-tip-item"; }
+
+            if ((colonia && texto.includes(colonia)) || (municipio && texto.includes(municipio))) { puntos += 20; document.getElementById("tip-ubicacion").className = "seo-tip-item ok"; }
+            else { document.getElementById("tip-ubicacion").className = "seo-tip-item"; }
+
+            if (operacion.split('/').map(s => s.trim()).some(p => texto.includes(p))) { puntos += 20; document.getElementById("tip-operacion").className = "seo-tip-item ok"; }
+            else { document.getElementById("tip-operacion").className = "seo-tip-item"; }
+
+            if (["exclusiv", "plusvalia", "seguridad", "lujo", "amenidades", "oportunidad"].some(k => texto.includes(k))) { puntos += 20; document.getElementById("tip-keywords").className = "seo-tip-item ok"; }
+            else { document.getElementById("tip-keywords").className = "seo-tip-item"; }
+
+            const bar = document.getElementById("seoBar");
+            const badge = document.getElementById("seoBadge");
+            bar.style.width = puntos + "%";
+
+            if (puntos < 60) { bar.style.backgroundColor = badge.style.backgroundColor = "var(--seo-red)"; badge.innerText = puntos + "% - Insuficiente"; }
+            else if (puntos <= 80) { bar.style.backgroundColor = badge.style.backgroundColor = "var(--seo-orange)"; badge.innerText = puntos + "% - Aceptable"; }
+            else { bar.style.backgroundColor = badge.style.backgroundColor = "var(--seo-green)"; badge.innerText = puntos + "% - Excelente (SEO Óptimo)"; }
+        }
+
+        verificarSesionAsesor();
+        inicializarEstados();
+        actualizarTipos();
+        actualizarAmenidades();
+        evaluarSEO();
+
+        /* ENVÍO AL BACKEND CON CREADOR_EMAIL Y ASESOR_OPCIONADOR */
+        document.getElementById("formPropiedad").onsubmit = async function(e) {
+            e.preventDefault();
+
+            let creadorEmail = asesorSesion ? asesorSesion.email : "adminportal@specialhome.com.mx";
+            let nombreAsesor = asesorSesion ? asesorSesion.nombre : "Irving Said Díaz Montiel";
+
+            const btnSubmit = document.getElementById('btnSubmit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "SUBIENDO Y GUARDANDO...";
+
+            try {
+                let imagenPrincipal = "";
+                let galeriaImagenes = "";
+
+                if (listaArchivos.length > 0) {
+                    const formData = new FormData();
+                    listaArchivos.forEach(item => formData.append('archivos', item.file));
+
+                    const respUpload = await fetch("/api/upload-imagenes", { method: "POST", body: formData });
+                    const resUploadJson = await respUpload.json();
+
+                    if (!respUpload.ok || !resUploadJson.urls) {
+                        alert("❌ Error al subir imágenes: " + (resUploadJson.detail || "Error en el servidor"));
+                        btnSubmit.disabled = false;
+                        btnSubmit.innerText = "REGISTRAR EN CRM";
+                        return;
+                    }
+
+                    const urlsSubidas = resUploadJson.urls;
+                    imagenPrincipal = urlsSubidas[0] || "";
+                    galeriaImagenes = urlsSubidas.slice(1).join(",");
+                }
+
+                const amenidadesCheckeadas = Array.from(document.querySelectorAll('#contenedorAmenidades input:checked')).map(cb => cb.value);
+
+                const datos = {
+                    slug: getVal("slug"),
+                    titulo: getVal("titulo"),
+                    categoria_tab: getVal("categoria_tab"),
+                    tipo_propiedad: getVal("tipo_propiedad"),
+                    tipo_operacion: getVal("tipo_operacion"),
+                    imagen_principal: imagenPrincipal,
+                    galeria_imagenes: galeriaImagenes,
+                    google_maps_iframe: getVal("google_maps_iframe"),
+                    calle_numero: getVal("calle_numero"),
+                    colonia: getVal("colonia"),
+                    municipio: getVal("municipio"),
+                    estado: getVal("estado"),
+                    cp: getVal("cp"),
+                    coordenadas_lat_lng: getVal("coordenadas_lat_lng"),
+                    precio_lista: limpiarNumero(getVal("precio_lista")),
+                    precio_minimo_oferta: limpiarNumero(getVal("precio_minimo_oferta")),
+                    precio_renta: limpiarNumero(getVal("precio_renta")),
+                    terreno_m2: parseFloat(getVal("terreno_m2")) || 0,
+                    construccion_m2: parseFloat(getVal("construccion_m2")) || 0,
+                    recamaras: parseInt(getVal("recamaras") || 0),
+                    banos_completos: parseInt(getVal("banos_completos") || 0),
+                    medios_banos: parseFloat(getVal("medios_banos") || 0),
+                    estacionamientos: parseInt(getVal("estacionamientos") || 0),
+                    agua_potable: getVal("agua_potable"),
+                    suministro_gas: getVal("suministro_gas"),
+                    seguridad: getVal("seguridad"),
+                    asesor_opcionador: nombreAsesor,
+                    valuador: getVal("valuador"),
+                    equipamiento_cercano: amenidadesCheckeadas.join(", "),
+                    descripcion: getVal("descripcion"),
+                    creador_email: creadorEmail
+                };
+
+                const respuesta = await fetch("/api/propiedades", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(datos)
+                });
+
+                if (respuesta.ok) {
+                    alert("🏡 ¡Propiedad registrada con éxito!");
+                    window.location.href = "/portal";
+                } else {
+                    const resPropJson = await respuesta.json();
+                    alert("❌ Error al guardar la propiedad: " + (resPropJson.detail || "Error en el servidor"));
+                }
+            } catch (err) {
+                console.error(err);
+                alert("❌ Error de comunicación: " + err.message);
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = "REGISTRAR EN CRM";
+            }
+        };
+    </script>
+</body>
+</html>
